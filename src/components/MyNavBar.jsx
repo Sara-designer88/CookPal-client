@@ -11,17 +11,18 @@ function MyNavBar() {
     <Navbar expand="sm" className="bg-body-tertiary" >
       <Container>
         <Navbar.Brand as={Link} to="/">
-         <img src="./src/images/CookPal-logo.png" alt="CookPal Logo" className='navbar-brand' width={140} height={80} />
+         <img src="./src/images/CookPal-logo.png" alt="CookPal Logo" className='navbar-brand' width={160} height={100} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
+            <Nav.Link as={Link} to="/my-recipes">
+             My Recipes
+            </Nav.Link>
             <Nav.Link as={Link} to="/favorites">
-             My Favorite Recipes
+             Favorites
             </Nav.Link>
-             <Nav.Link as={Link} to="/add-recipe">
-             Create New Recipes
-            </Nav.Link>
+           
           </Nav>
         </Navbar.Collapse>
       </Container>

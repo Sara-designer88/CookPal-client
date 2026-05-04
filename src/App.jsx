@@ -29,9 +29,9 @@ function App() {
       <Route path="/" element={<HomePage/>}/>
       <Route path="/favorites" element={<FavoriteList/>}/>
       <Route path="/add-recipe" element={<AddRecipe/>}/>
-      <Route path="/edit-recipe/:id" element={<EditRecipe/>}/>
+      <Route path="/edit-recipe/:recipeId" element={<EditRecipe/>}/>
       <Route path="/my-recipes" element={<RecipeList/>}/>
-      <Route path="/recipes/:id" element={<RecipeDetails/>}/>
+      <Route path="/recipes/:recipeId" element={<RecipeDetails/>}/>
       <Route path="*" element={<NotFound/>}/>
       
     </Routes>

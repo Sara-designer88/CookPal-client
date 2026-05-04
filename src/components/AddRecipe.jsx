@@ -1,6 +1,235 @@
+import { Dropdown } from "bootstrap";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Button from "react-bootstrap/Button";
+import Badge from "react-bootstrap/Badge";
+import ListGroup from "react-bootstrap/ListGroup";
+
 function AddRecipe() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [ingredient, setIngredient] = useState({
+    name: "",
+    quantity: "",
+    unit: "",
+  });
+  const [ingredients, setIngredients] = useState([]);
+  const [steps, setSteps] = useState("");
+  const [category, setCategory] = useState("");
+  const [recipeId, setRecipeId] = useState("");
+
+  const navigate = useNavigate();
+
+
+  // function to choose random recipe id for the new recipe
+  const generateRecipeId = () => {
+    const randomId = Math.floor(Math.random() * 1000000);
+    setRecipeId(randomId.toString());
+  };
+
+  // function to add ingredient to the list of ingredients
+  const addIngredient = () => {
+    if (!ingredient.name) return;
+
+    const newList = [...ingredients];
+    newList.push(ingredient);
+
+    setIngredients(newList);
+
+    // clear inputs
+    setIngredient({
+      name: "",
+      quantity: "",
+      unit: "",
+    });
+  };
+
+  // delete ingredient from the list of ingredients
+  const deleteIngredient = (index) => {
+    const newList = [...ingredients];
+    newList.splice(index, 1);
+    setIngredients(newList);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const body = {
+      title: title,
+      description: description,
+      ingredients: ingredients,
+      steps: steps,
+      category: category,
+      recipeId: recipeId,
+    };
+
+    try {
+      const response = await axios.post(
+        `http://localhost:5173/my-recipes`,
+        body,
+      );
+      console.log(response.data);
+      navigate("/my-recipes");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div>AddRecipe</div>
-  )
+    <div>
+  
+      <h3 style={{ marginTop: '4rem' }}>Add New Recipe</h3>
+
+      <form >
+        <InputGroup className="mb-4" style={{ marginTop: '2rem' }}>
+          <InputGroup.Text
+            id="inputGroup-sizing-default"
+          >
+            Title
+          </InputGroup.Text>
+          <Form.Control
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </InputGroup>
+
+        <InputGroup className="mb-4">
+          <InputGroup.Text
+            id="inputGroup-sizing-default"
+          >
+            Description
+          </InputGroup.Text>
+          <Form.Control
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </InputGroup>
+
+        <InputGroup className="mb-2">
+          <InputGroup.Text
+            id="inputGroup-sizing-default"
+          >
+            Ingredient
+          </InputGroup.Text>
+          <Form.Control
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+            value={ingredient.name}
+            onChange={(e) =>
+              setIngredient({ ...ingredient, name: e.target.value })
+            }
+          />
+        </InputGroup>
+
+        <InputGroup className="mb-2">
+          <InputGroup.Text>Quantity and Unit</InputGroup.Text>
+          <Form.Control
+            aria-label="First name"
+            value={ingredient.quantity}
+            onChange={(e) =>
+              setIngredient({ ...ingredient, quantity: e.target.value })
+            }
+          />
+          <Form.Control
+            aria-label="Last name"
+            value={ingredient.unit}
+            onChange={(e) =>
+              setIngredient({ ...ingredient, unit: e.target.value })
+            }
+          />
+        </InputGroup>
+
+        <button type="button"  className="btn btn-primary" onClick={addIngredient} style={{ display: 'flex',alignItems: 'left',marginBottom: '2rem' }}>
+          Add to ingredients{" "}
+        </button>
+
+        <InputGroup className="mb-4">
+          <InputGroup.Text>Ingredients</InputGroup.Text>
+          <div
+            style={{
+              border: '1px solid #ced4da',
+              borderRadius: '0.375rem',
+              padding: '0.375rem 0.75rem',
+              minHeight: '100px',
+              width: '100%',
+              backgroundColor: '#fff',
+              fontSize: '0.875rem'
+            }}
+            className="form-control"
+          >
+            {ingredients.length === 0 ? (
+              <div style={{ color: '#6c757d', fontStyle: 'italic' }}>
+                No ingredients added yet
+              </div>
+            ) : (
+              ingredients.map((item, index) => (
+                <div
+                  key={index}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '0.25rem 0',
+                  }}
+                >
+                  <div>
+                    <strong>{item.name}</strong> - {item.quantity} {item.unit}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => deleteIngredient(index)}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#dc3545',
+                      cursor: 'pointer',
+                      fontSize: '1.2rem',
+                      padding: '0 0.25rem'
+                    }}
+                    title="Remove ingredient"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
+        </InputGroup>
+
+        <InputGroup className="mb-4">
+          <InputGroup.Text>Steps</InputGroup.Text>
+          <Form.Control
+            as="textarea"
+            aria-label="With textarea"
+            value={steps}
+            onChange={(e) => setSteps(e.target.value)}
+          />
+        </InputGroup>
+
+        <Form.Select className="mb-4"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option>Select Category </option>
+          <option value="1">Breakfast</option>
+          <option value="2">Lunch</option>
+          <option value="3">Dinner</option>
+          <option value="4">Dessert</option>
+        </Form.Select>
+
+        <button style={{ marginTop: '2rem', marginBottom: '5rem' }} className="btn btn-primary" onClick={handleSubmit}>
+          Add Recipe
+        </button>
+      </form>
+    </div>
+  );
 }
-export default AddRecipe
+export default AddRecipe;
