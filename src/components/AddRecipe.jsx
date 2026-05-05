@@ -55,6 +55,7 @@ function AddRecipe() {
     setIngredients(newList);
   };
 
+  // function to submit the form and create a new recipe
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -69,11 +70,9 @@ function AddRecipe() {
 
     try {
       const response = await axios.post(
-        `http://localhost:5173/my-recipes`,
-        body,
-      );
-      console.log(response.data);
-      navigate("/my-recipes");
+        `${import.meta.env.VITE_SERVER_URL}/recipes`,body);
+      console.log("created!", response.data);
+      navigate("/all-recipes");
     } catch (error) {
       console.log(error);
     }

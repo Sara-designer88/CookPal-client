@@ -16,9 +16,12 @@ function MyNavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/my-recipes">
-             My Recipes
+            <Nav.Link as={Link} to="/all-recipes">
+             All Recipes
             </Nav.Link>
+            {/* <Nav.Link as={Link} to="/my-recipes">
+             My Recipes
+            </Nav.Link> */}
             <Nav.Link as={Link} to="/favorites">
              Favorites
             </Nav.Link>

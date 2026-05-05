@@ -30,7 +30,8 @@ function App() {
       <Route path="/favorites" element={<FavoriteList/>}/>
       <Route path="/add-recipe" element={<AddRecipe/>}/>
       <Route path="/edit-recipe/:recipeId" element={<EditRecipe/>}/>
-      <Route path="/my-recipes" element={<RecipeList/>}/>
+      <Route path="/all-recipes" element={<RecipeList/>}/>
+      {/* <Route path="/my-recipes" element={<MyRecipes/>}/> */}
       <Route path="/recipes/:recipeId" element={<RecipeDetails/>}/>
       <Route path="*" element={<NotFound/>}/>
       

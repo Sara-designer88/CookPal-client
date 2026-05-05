@@ -15,23 +15,7 @@ function HomePage() {
       
 
 
-      <h3>Recipe List</h3>
-
-      <Navbar bg="light" data-bs-theme="light">
-        <Container>
-          <Navbar.Brand >Filter By</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link >All</Nav.Link>
-            <Nav.Link >My Recipes</Nav.Link>
-            <Nav.Link >API Recipes</Nav.Link>
-            <Nav.Link >My favorite Recipes</Nav.Link>
-          </Nav>
-        
-        </Container>
-           <button type="button" className="btn btn-primary" >
-         <Link to="/add-recipe">Add New Recipe</Link>
-      </button>
-      </Navbar>
+      <h3>Home</h3>
 
 
 
