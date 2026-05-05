@@ -3,17 +3,17 @@ import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
 
-
-function RecipeCard(props) {
+function RecipeCardAPI(props) {
   const navigate = useNavigate();
+
   return (
  <div style={{display:'flex',flexWrap:'wrap'}}>
           <Card style={{ width: '18rem' ,margin: '1rem' , boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' , height: '100%' }}> 
       <Card.Img variant="top" src="" />
       <Card.Body>
-        <Card.Title>{props.recipe.title}</Card.Title>
+        <Card.Title>{props.recipe.strMeal}</Card.Title>
         <Card.Text>
-          {props.recipe.description}
+          {props.recipe.strMealAlternate}
         </Card.Text>
         <Button variant="primary" onClick={()=>{navigate(`/recipes/${props.recipe.id}`)}}>View Details</Button>
       </Card.Body>
@@ -22,7 +22,5 @@ function RecipeCard(props) {
   )
 
 }
-export default RecipeCard
 
-
-
+export default RecipeCardAPI

@@ -26,11 +26,21 @@ function RecipeDetails() {
 
   if(!recipe) return <h3>Loading...</h3>
 
+  const deleteRecipe = async () => {
+    try {
+      const response = await axios.delete(`${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`);
+      console.log("deleted!", response.data);
+      navigate("/all-recipes");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     
     <div>
 
-      <Card style={{ width: '18rem' }}>
+      <Card style={{ width: '30rem', margin: '2rem auto', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
       <Card.Img variant="top" src="" />
       <Card.Body>
         <Card.Title>{recipe.title}</Card.Title>
@@ -47,10 +57,17 @@ function RecipeDetails() {
         </ListGroup.Item>
         <ListGroup.Item>Steps: {recipe.steps}</ListGroup.Item>
         <ListGroup.Item>Category : {recipe.category}</ListGroup.Item>
+      <ListGroup.Item>created by : {recipe.source}</ListGroup.Item>
       </ListGroup>
       <Card.Body>
-     <button type="button" className="btn btn-primary" onClick={()=>{navigate("/all-recipes")}}>
-          Back to Recipe List
+     <button style={{ margin: "0.5rem" }} type="button" className="btn btn-secondary" onClick={()=>{navigate("/all-recipes")}}>
+          Back
+        </button>
+       <button style={{ margin: "0.5rem" }} type="button" className="btn btn-primary" onClick={()=>{navigate("/edit-recipe/"+recipeId)}}>
+          edit
+        </button>
+         <button style={{ margin: "0.5rem" }} type="button" className="btn btn-danger" onClick={deleteRecipe}>
+          delete
         </button>
       </Card.Body>
     </Card>

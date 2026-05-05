@@ -17,22 +17,21 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import ListGroup from "react-bootstrap/ListGroup";
 
 
-function RecipeList() {
-  const [recipes, setRecipes] = useState([]);
-  const navigate = useNavigate();
+function ApiList() {
+
+  const [APIRecipes, setAPIRecipes] = useState([]);
+
   
 
   useEffect(() => {
     getData();
   }, []);
 
-  // function to get all recipes from the database
+  // function to get all API recipes 
   const getData = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_SERVER_URL}/recipes`,
-      );
-      setRecipes(response.data);
+      const response = await axios.get("https://www.themealdb.com/api/json/v1/" );
+      setAPIRecipes(response.data);
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -40,7 +39,7 @@ function RecipeList() {
   };
 
   // if there are no recipes, show loading message
-  if (!recipes) return <h3>Loading...</h3>;
+  if (!APIRecipes) return <h3>Loading...</h3>;
 
 
 
@@ -81,13 +80,13 @@ function RecipeList() {
         <option value="Dinner">Dinner</option>
         <option value="Dessert">Dessert</option>
       </Form.Select>
+    
 
-      {recipes.map((recipe) => {
-        return <RecipeCard key={recipe.id} recipe={recipe} />;
-      })}
-
+        {APIRecipes.map((recipe) => {
+            return <RecipeCardAPI key={recipe.idMeal} recipe={recipe} />;
+        })}
     
     </div>
   );
 }
-export default RecipeList;
+export default ApiList

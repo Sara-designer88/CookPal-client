@@ -21,15 +21,12 @@ function AddRecipe() {
   const [steps, setSteps] = useState("");
   const [category, setCategory] = useState("");
   const [recipeId, setRecipeId] = useState("");
+  const [source, setSource] = useState("user");
 
   const navigate = useNavigate();
 
 
-  // function to choose random recipe id for the new recipe
-  const generateRecipeId = () => {
-    const randomId = Math.floor(Math.random() * 1000000);
-    setRecipeId(randomId.toString());
-  };
+ 
 
   // function to add ingredient to the list of ingredients
   const addIngredient = () => {
@@ -66,6 +63,7 @@ function AddRecipe() {
       steps: steps,
       category: category,
       recipeId: recipeId,
+      source: source,
     };
 
     try {
@@ -81,10 +79,10 @@ function AddRecipe() {
   return (
     <div>
   
-      <h3 style={{ marginTop: '4rem' }}>Add New Recipe</h3>
+      <h3 style={{ marginTop: '4rem' , marginBottom: '2rem' }}>Add New Recipe</h3>
 
-      <form >
-        <InputGroup className="mb-4" style={{ marginTop: '2rem' }}>
+      <form style={{margin:"2rem"}}>
+        <InputGroup className="mb-4" >
           <InputGroup.Text
             id="inputGroup-sizing-default"
           >
@@ -218,10 +216,10 @@ function AddRecipe() {
           onChange={(e) => setCategory(e.target.value)}
         >
           <option>Select Category </option>
-          <option value="1">Breakfast</option>
-          <option value="2">Lunch</option>
-          <option value="3">Dinner</option>
-          <option value="4">Dessert</option>
+          <option value="Breakfast">Breakfast</option>
+          <option value="Lunch">Lunch</option>
+          <option value="Dinner">Dinner</option>
+          <option value="Dessert">Dessert</option>
         </Form.Select>
 
         <button style={{ marginTop: '2rem', marginBottom: '5rem' }} className="btn btn-primary" onClick={handleSubmit}>
