@@ -19,22 +19,21 @@ import ListGroup from "react-bootstrap/ListGroup";
 function RecipeList() {
   const [activeTab, setActiveTab] = useState("all");
   const [recipes, setRecipes] = useState([]);
- const [ category, setCategory] = useState("");
+  const [category, setCategory] = useState("");
   const navigate = useNavigate();
 
-  // BaseRecipe for choosing with list will appear based on filtering the pages 
-const baseRecipes =
-  activeTab === "my"
-    ? recipes.filter((r) => r.source === "user")
-    : activeTab === "api"
-    ? recipes.filter((r) => r.source === "api")
-    : recipes;
+  // BaseRecipe for choosing with list will appear based on filtering the pages
+  const baseRecipes =
+    activeTab === "my"
+      ? recipes.filter((r) => r.source === "user")
+      : activeTab === "api"
+        ? recipes.filter((r) => r.source === "api")
+        : recipes;
 
-//this to filter by recipe category from the selected base recipe
-const displayedRecipes = baseRecipes.filter((recipe) => {
-  return category ? recipe.category === category : true ;
-});
-
+  //this to filter by recipe category from the selected base recipe
+  const displayedRecipes = baseRecipes.filter((recipe) => {
+    return category ? recipe.category === category : true;
+  });
 
   useEffect(() => {
     getData();
@@ -118,13 +117,23 @@ const displayedRecipes = baseRecipes.filter((recipe) => {
       </Form.Select> */}
       </div>
 
-      {displayedRecipes.length === 0 ? (
-  <p>Sorry no recipes found</p>
-) : (
-  displayedRecipes.map((recipe) => (
-    <RecipeCard key={recipe.id} recipe={recipe} />
-  ))
-)}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent:"space-around",
+          alignContent:"center",
+          gap: '1rem'
+        }}
+      >
+        {displayedRecipes.length === 0 ? (
+          <p>Sorry no recipes found</p>
+        ) : (
+          displayedRecipes.map((recipe) => (
+            <RecipeCard key={recipe.id} recipe={recipe}  />
+          ))
+        )}
+      </div>
     </div>
   );
 }

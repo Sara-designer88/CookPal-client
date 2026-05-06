@@ -5,13 +5,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import ToggleButton from 'react-bootstrap/ToggleButton';
+import { ToggleButton} from 'react-bootstrap';
+
 
 function EditRecipe() {
   const { recipeId } = useParams();
   const navigate = useNavigate();
 
+  const [favChecked, setFavChecked] = useState(false);
+
+  const [ image, setImage]= useState(null)
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [ingredient, setIngredient] = useState({
@@ -22,7 +25,7 @@ function EditRecipe() {
   const [ingredients, setIngredients] = useState([]);
   const [steps, setSteps] = useState("");
   const [category, setCategory] = useState("");
-   const [favChecked, setFavChecked] = useState(false);
+
 
   /*************************** */
   useEffect(() => {
@@ -40,7 +43,7 @@ function EditRecipe() {
       setIngredients(response.data.ingredients);
       setSteps(response.data.steps);
       setCategory(response.data.category);
-      setFavChecked(response.data.isfavorite);
+      setFavChecked(response.data.favChecked)
     } catch (error) {
       console.log(error);
     }
@@ -57,7 +60,7 @@ function EditRecipe() {
       ingredients: ingredients,
       steps: steps,
       category: category,
-      isfavorite:favChecked,
+      favChecked:favChecked
     };
 
     try {
@@ -72,7 +75,7 @@ function EditRecipe() {
     }
   };
 
-  /********************* */
+  /********************* ingredients management */
 
   const addIngredient = () => {
     if (!ingredient.name) return;
@@ -101,6 +104,18 @@ function EditRecipe() {
       <h2 style={{ marginTop: '4rem', marginBottom: '2rem' }}>Edit Recipe</h2>
 
       <form style={{margin:"2rem"}}>
+           <InputGroup className="mb-2" style={{ marginTop: "2rem" }}>
+          <InputGroup.Text id="inputGroup-sizing-default">
+            Upload Image
+          </InputGroup.Text>
+          <Form.Control
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          />
+        </InputGroup>
+
         <InputGroup className="mb-4" style={{ marginTop: "2rem" }}>
           <InputGroup.Text id="inputGroup-sizing-default">
             Title
@@ -246,6 +261,17 @@ function EditRecipe() {
           <option value="Others">Others</option>
         </Form.Select>
 
+<ToggleButton
+       style={{margin:"1rem"}}
+        id="toggle-check"
+        type="checkbox"
+        variant="outline-primary"
+        checked={favChecked}
+        value="1"
+        onChange={async (e) => {setFavChecked(e.target.checked)}}
+      >
+        {favChecked ? "❤️" : "Add to 💔" }
+     </ToggleButton>
 
         <button
         style={{ margin:" 1rem "}}
@@ -257,17 +283,7 @@ function EditRecipe() {
         >
           Back
         </button>
-          <ToggleButton
-       style={{margin:"1rem"}}
-        id="toggle-check"
-        type="checkbox"
-        variant="outline-primary"
-        checked={favChecked}
-        value="1"
-        onChange={(e) => setFavChecked(e.currentTarget.checked)}
-      >
-        {favChecked ? "❤️" : "Add to 💔" }
-     </ToggleButton>
+  
 
         <button
           style={{ margin:" 1rem " }}

@@ -7,12 +7,10 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
-import ListGroup from "react-bootstrap/ListGroup";
-import ToggleButton from 'react-bootstrap/ToggleButton';
+import { ToggleButton } from "react-bootstrap";
 
 function AddRecipe() {
-
-  const [favChecked, setFavChecked] = useState(false);
+  const [ image , setImage] = useState(null)
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [ingredient, setIngredient] = useState({
@@ -23,13 +21,10 @@ function AddRecipe() {
   const [ingredients, setIngredients] = useState([]);
   const [steps, setSteps] = useState("");
   const [category, setCategory] = useState("");
-  const [recipeId, setRecipeId] = useState("");
   const [source, setSource] = useState("user");
+  const [favChecked, setFavChecked] = useState(false);
 
   const navigate = useNavigate();
-
-
- 
 
   // function to add ingredient to the list of ingredients
   const addIngredient = () => {
@@ -60,19 +55,21 @@ function AddRecipe() {
     e.preventDefault();
 
     const body = {
+      image: image,
       title: title,
       description: description,
       ingredients: ingredients,
       steps: steps,
       category: category,
-      recipeId: recipeId,
       source: source,
-      isFavorite: favChecked,
+      favChecked: favChecked,
     };
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/recipes`,body);
+        `${import.meta.env.VITE_SERVER_URL}/recipes`,
+        body,
+      );
       console.log("created!", response.data);
       navigate("/all-recipes");
     } catch (error) {
@@ -82,14 +79,13 @@ function AddRecipe() {
 
   return (
     <div>
-  
-      <h3 style={{ marginTop: '4rem' , marginBottom: '2rem' }}>Add New Recipe</h3>
+      <h3 style={{ marginTop: "4rem", marginBottom: "2rem" }}>
+        Add New Recipe
+      </h3>
 
-      <form style={{margin:"2rem"}}>
-        <InputGroup className="mb-4" >
-          <InputGroup.Text
-            id="inputGroup-sizing-default"
-          >
+      <form style={{ margin: "2rem" }}>
+        <InputGroup className="mb-4">
+          <InputGroup.Text id="inputGroup-sizing-default">
             Title
           </InputGroup.Text>
           <Form.Control
@@ -101,9 +97,7 @@ function AddRecipe() {
         </InputGroup>
 
         <InputGroup className="mb-4">
-          <InputGroup.Text
-            id="inputGroup-sizing-default"
-          >
+          <InputGroup.Text id="inputGroup-sizing-default">
             Description
           </InputGroup.Text>
           <Form.Control
@@ -115,9 +109,7 @@ function AddRecipe() {
         </InputGroup>
 
         <InputGroup className="mb-2">
-          <InputGroup.Text
-            id="inputGroup-sizing-default"
-          >
+          <InputGroup.Text id="inputGroup-sizing-default">
             Ingredient
           </InputGroup.Text>
           <Form.Control
@@ -148,7 +140,12 @@ function AddRecipe() {
           />
         </InputGroup>
 
-        <button type="button"  className="btn btn-primary" onClick={addIngredient} style={{ display: 'flex',alignItems: 'left',marginBottom: '2rem' }}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={addIngredient}
+          style={{ display: "flex", alignItems: "left", marginBottom: "2rem" }}
+        >
           Add to ingredients{" "}
         </button>
 
@@ -156,18 +153,18 @@ function AddRecipe() {
           <InputGroup.Text>Ingredients</InputGroup.Text>
           <div
             style={{
-              border: '1px solid #ced4da',
-              borderRadius: '0.375rem',
-              padding: '0.375rem 0.75rem',
-              minHeight: '100px',
-              width: '100%',
-              backgroundColor: '#fff',
-              fontSize: '0.875rem'
+              border: "1px solid #ced4da",
+              borderRadius: "0.375rem",
+              padding: "0.375rem 0.75rem",
+              minHeight: "100px",
+              width: "100%",
+              backgroundColor: "#fff",
+              fontSize: "0.875rem",
             }}
             className="form-control"
           >
             {ingredients.length === 0 ? (
-              <div style={{ color: '#6c757d', fontStyle: 'italic' }}>
+              <div style={{ color: "#6c757d", fontStyle: "italic" }}>
                 No ingredients added yet
               </div>
             ) : (
@@ -175,10 +172,10 @@ function AddRecipe() {
                 <div
                   key={index}
                   style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '0.25rem 0',
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "0.25rem 0",
                   }}
                 >
                   <div>
@@ -188,12 +185,12 @@ function AddRecipe() {
                     type="button"
                     onClick={() => deleteIngredient(index)}
                     style={{
-                      background: 'none',
-                      border: 'none',
-                      color: '#dc3545',
-                      cursor: 'pointer',
-                      fontSize: '1.2rem',
-                      padding: '0 0.25rem'
+                      background: "none",
+                      border: "none",
+                      color: "#dc3545",
+                      cursor: "pointer",
+                      fontSize: "1.2rem",
+                      padding: "0 0.25rem",
                     }}
                     title="Remove ingredient"
                   >
@@ -215,7 +212,8 @@ function AddRecipe() {
           />
         </InputGroup>
 
-        <Form.Select className="mb-4"
+        <Form.Select
+          className="mb-4"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         >
@@ -225,34 +223,41 @@ function AddRecipe() {
           <option value="Lunch">Lunch</option>
           <option value="Dinner">Dinner</option>
           <option value="Dessert">Dessert</option>
-                <option value="Snack">Snack</option>
+          <option value="Snack">Snack</option>
           <option value="Vegan">Vegan</option>
           <option value="Drinks">Drinks</option>
           <option value="Others">Others</option>
         </Form.Select>
 
+        <ToggleButton
+          style={{ margin: "1rem" }}
+          id="toggle-check"
+          type="checkbox"
+          variant="outline-primary"
+          checked={favChecked}
+          value="1"
+          onChange={async (e) => {setFavChecked(e.target.checked)}}
+          >
+          {favChecked ? "❤️" : "Add to 💔"}
+        </ToggleButton>
 
-
-
-
-
-  <button style={{margin:"1rem"}} type="button" className="btn btn-secondary" onClick={()=>{navigate("/all-recipes")}}>
+        <button
+          style={{ margin: "1rem" }}
+          type="button"
+          className="btn btn-secondary"
+          onClick={() => {
+            navigate("/all-recipes");
+          }}
+        >
           Back
         </button>
-        <ToggleButton
-       style={{margin:"1rem"}}
-        id="toggle-check"
-        type="checkbox"
-        variant="outline-primary"
-        checked={favChecked}
-        value="1"
-        onChange={(e) => setFavChecked(e.currentTarget.checked)}
-      >
-        {favChecked ? "❤️" : "Add to 💔" }
-     </ToggleButton>
-        
-        
-        <button style={{margin:"1rem"}} type="button" className="btn btn-primary" onClick={handleSubmit}>
+
+        <button
+          style={{ margin: "1rem" }}
+          type="button"
+          className="btn btn-primary"
+          onClick={handleSubmit}
+        >
           Add Recipe
         </button>
       </form>

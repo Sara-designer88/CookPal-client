@@ -4,6 +4,7 @@ import { use, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { ToggleButton} from 'react-bootstrap';
 
 
 
@@ -12,6 +13,7 @@ function RecipeDetails() {
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
   const navigate = useNavigate();
+
   
   useEffect(() => {
     getData();
@@ -43,10 +45,11 @@ function RecipeDetails() {
     <div>
 
       <Card style={{ width: '30rem', margin: '2rem auto', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-      <Card.Img variant="top" src="" />
+      <Card.Img variant="top" src= "./src/images/CardSample.png" />
       <Card.Body>
         <Card.Title>{recipe.title}</Card.Title> 
-        {recipe.isFavorite ? " ❤️" : " 💔" }   
+       {recipe.favChecked ? "❤️" : "💔" }
+       
         <Card.Text>
           {recipe.description}
         </Card.Text>
