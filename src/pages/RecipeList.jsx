@@ -8,7 +8,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
 import RecipeCard from "../components/RecipeCard";
 import Form from "react-bootstrap/Form";
-import Row  from "react-bootstrap/Row";
+import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
@@ -16,11 +16,25 @@ import { Dropdown } from "bootstrap";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import ListGroup from "react-bootstrap/ListGroup";
 
-
 function RecipeList() {
+  const [activeTab, setActiveTab] = useState("all");
   const [recipes, setRecipes] = useState([]);
+ const [ category, setCategory] = useState("");
   const navigate = useNavigate();
-  
+
+  // BaseRecipe for choosing with list will appear based on filtering the pages 
+const baseRecipes =
+  activeTab === "my"
+    ? recipes.filter((r) => r.source === "user")
+    : activeTab === "api"
+    ? recipes.filter((r) => r.source === "api")
+    : recipes;
+
+//this to filter by recipe category from the selected base recipe
+const displayedRecipes = baseRecipes.filter((recipe) => {
+  return category ? recipe.category === category : true ;
+});
+
 
   useEffect(() => {
     getData();
@@ -42,51 +56,75 @@ function RecipeList() {
   // if there are no recipes, show loading message
   if (!recipes) return <h3>Loading...</h3>;
 
-
-
-
   return (
     <div>
-      <h2 style={{ marginTop: "4rem", marginBottom: "2rem" }}>Recipe List</h2>
-  
+      <h2 style={{ marginTop: "2rem", marginBottom: "2rem" }}>Recipe List</h2>
+
       <Navbar bg="light" data-bs-theme="light">
         <Container>
-          <Navbar.Brand href="#home">Filter By</Navbar.Brand>
+          <Navbar.Brand></Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/all-recipes">
+            <Nav.Link
+              onClick={() => setActiveTab("all")}
+              active={activeTab === "all"}
+            >
               All Recipes
             </Nav.Link>
-            <Nav.Link as={Link} to="/all-recipes">
+
+            <Nav.Link
+              onClick={() => setActiveTab("my")}
+              active={activeTab === "my"}
+            >
               My Recipes
             </Nav.Link>
-            <Nav.Link as={Link} to="/all-recipes">
+
+            <Nav.Link
+              onClick={() => setActiveTab("api")}
+              active={activeTab === "api"}
+            >
               API Recipes
             </Nav.Link>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => {
-                navigate("/add-recipe");
-              }}
-            >
-              Create New Recipe{" "}
-            </button>
           </Nav>
         </Container>
+        <button
+          type="button"
+          className="btn btn-primary  text-wrap text-md-nowrap"
+          onClick={() => {
+            navigate("/add-recipe");
+          }}
+        >
+          Create Recipe
+        </button>
       </Navbar>
-      <Form.Select className="mb-4">
-        <option>Filter by category </option>
-        <option value="Breakfast">Breakfast</option>
-        <option value="Lunch">Lunch</option>
-        <option value="Dinner">Dinner</option>
-        <option value="Dessert">Dessert</option>
-      </Form.Select>
 
-      {recipes.map((recipe) => {
-        return <RecipeCard key={recipe.id} recipe={recipe} />;
-      })}
+      <div className="d-flex gap-3 mb-4 flex-wrap">
+        <Form.Select onChange={(e) => setCategory(e.target.value)}>
+          <option value="">Filter by category </option>
+          <option value="Breakfast">Breakfast</option>
+          <option value="Brunch">Brunch</option>
+          <option value="Lunch">Lunch</option>
+          <option value="Dinner">Dinner</option>
+          <option value="Dessert">Dessert</option>
+          <option value="Snack">Snack</option>
+          <option value="Vegan">Vegan</option>
+          <option value="Drinks">Drinks</option>
+          <option value="Others">Others</option>
+        </Form.Select>
 
-    
+        {/* <Form.Select >
+    <option value="">Filter by callories</option>
+    <option value="Easy">less than 500</option>
+    <option value="Hard">less than 1000</option>
+      </Form.Select> */}
+      </div>
+
+      {displayedRecipes.length === 0 ? (
+  <p>Sorry no recipes found</p>
+) : (
+  displayedRecipes.map((recipe) => (
+    <RecipeCard key={recipe.id} recipe={recipe} />
+  ))
+)}
     </div>
   );
 }

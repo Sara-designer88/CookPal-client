@@ -1,4 +1,4 @@
-import './App.css'
+
 import { Routes, Route } from 'react-router-dom'
 
 import MyNavBar from './components/MyNavBar'
@@ -10,7 +10,7 @@ import EditRecipe from './pages/EditRecipe'
 import RecipeList from './pages/RecipeList'
 import RecipeDetails from './pages/RecipeDetails'
 import NotFound from './pages/NotFound'
-
+import './App.css'
 import Image from 'react-bootstrap/Image';
 import "./images/CookPal-logo.png"
 import "./images/CookPal-header.jpg"
@@ -23,8 +23,7 @@ function App() {
 
     <MyNavBar/>
   
-    <img src="./src/images/CookPal-header.jpg" alt="CookPal Logo" className="header-image" />
-    
+   
     <Routes>
       <Route path="/" element={<HomePage/>}/>
       <Route path="/favorites" element={<FavoriteList/>}/>

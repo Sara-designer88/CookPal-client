@@ -8,8 +8,11 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import ListGroup from "react-bootstrap/ListGroup";
+import ToggleButton from 'react-bootstrap/ToggleButton';
 
 function AddRecipe() {
+
+  const [favChecked, setFavChecked] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [ingredient, setIngredient] = useState({
@@ -64,6 +67,7 @@ function AddRecipe() {
       category: category,
       recipeId: recipeId,
       source: source,
+      isFavorite: favChecked,
     };
 
     try {
@@ -215,14 +219,40 @@ function AddRecipe() {
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         >
-          <option>Select Category </option>
+          <option value="">Select Category </option>
           <option value="Breakfast">Breakfast</option>
+          <option value="Brunch">Brunch</option>
           <option value="Lunch">Lunch</option>
           <option value="Dinner">Dinner</option>
           <option value="Dessert">Dessert</option>
+                <option value="Snack">Snack</option>
+          <option value="Vegan">Vegan</option>
+          <option value="Drinks">Drinks</option>
+          <option value="Others">Others</option>
         </Form.Select>
 
-        <button style={{ marginTop: '2rem', marginBottom: '5rem' }} className="btn btn-primary" onClick={handleSubmit}>
+
+
+
+
+
+  <button style={{margin:"1rem"}} type="button" className="btn btn-secondary" onClick={()=>{navigate("/all-recipes")}}>
+          Back
+        </button>
+        <ToggleButton
+       style={{margin:"1rem"}}
+        id="toggle-check"
+        type="checkbox"
+        variant="outline-primary"
+        checked={favChecked}
+        value="1"
+        onChange={(e) => setFavChecked(e.currentTarget.checked)}
+      >
+        {favChecked ? "❤️" : "Add to 💔" }
+     </ToggleButton>
+        
+        
+        <button style={{margin:"1rem"}} type="button" className="btn btn-primary" onClick={handleSubmit}>
           Add Recipe
         </button>
       </form>

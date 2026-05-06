@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom"
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
+
+
 function RecipeDetails() {
 
   const { recipeId } = useParams();
@@ -43,7 +45,8 @@ function RecipeDetails() {
       <Card style={{ width: '30rem', margin: '2rem auto', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
       <Card.Img variant="top" src="" />
       <Card.Body>
-        <Card.Title>{recipe.title}</Card.Title>
+        <Card.Title>{recipe.title}</Card.Title> 
+        {recipe.isFavorite ? " ❤️" : " 💔" }   
         <Card.Text>
           {recipe.description}
         </Card.Text>

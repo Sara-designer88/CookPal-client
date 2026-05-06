@@ -6,6 +6,7 @@ import axios from "axios";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import ToggleButton from 'react-bootstrap/ToggleButton';
 
 function EditRecipe() {
   const { recipeId } = useParams();
@@ -21,6 +22,7 @@ function EditRecipe() {
   const [ingredients, setIngredients] = useState([]);
   const [steps, setSteps] = useState("");
   const [category, setCategory] = useState("");
+   const [favChecked, setFavChecked] = useState(false);
 
   /*************************** */
   useEffect(() => {
@@ -38,6 +40,7 @@ function EditRecipe() {
       setIngredients(response.data.ingredients);
       setSteps(response.data.steps);
       setCategory(response.data.category);
+      setFavChecked(response.data.isfavorite);
     } catch (error) {
       console.log(error);
     }
@@ -54,6 +57,7 @@ function EditRecipe() {
       ingredients: ingredients,
       steps: steps,
       category: category,
+      isfavorite:favChecked,
     };
 
     try {
@@ -230,12 +234,19 @@ function EditRecipe() {
           value={category}
           onChange={(e) => setCategory(e.target.value)}
         >
-          <option>Select Category </option>
+          <option value="">Select Category </option>
           <option value="Breakfast">Breakfast</option>
+          <option value="Brunch">Brunch</option>
           <option value="Lunch">Lunch</option>
           <option value="Dinner">Dinner</option>
           <option value="Dessert">Dessert</option>
+                <option value="Snack">Snack</option>
+          <option value="Vegan">Vegan</option>
+          <option value="Drinks">Drinks</option>
+          <option value="Others">Others</option>
         </Form.Select>
+
+
         <button
         style={{ margin:" 1rem "}}
           type="button"
@@ -246,6 +257,18 @@ function EditRecipe() {
         >
           Back
         </button>
+          <ToggleButton
+       style={{margin:"1rem"}}
+        id="toggle-check"
+        type="checkbox"
+        variant="outline-primary"
+        checked={favChecked}
+        value="1"
+        onChange={(e) => setFavChecked(e.currentTarget.checked)}
+      >
+        {favChecked ? "❤️" : "Add to 💔" }
+     </ToggleButton>
+
         <button
           style={{ margin:" 1rem " }}
           className="btn btn-primary"
