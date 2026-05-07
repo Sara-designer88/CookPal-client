@@ -166,7 +166,7 @@ function ApiDescription() {
             type="button"
             className="btn btn-secondary"
             onClick={() => {
-              navigate("/all-recipes");
+              navigate("/api-Recipes");
             }}
           >
             Back
