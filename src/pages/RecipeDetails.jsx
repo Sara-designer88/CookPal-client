@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom"
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { ToggleButton} from 'react-bootstrap';
-import "../images/CardSample.png"
+import "../images/CardSample.jpg"
 
 
 
@@ -47,7 +47,12 @@ function RecipeDetails() {
     <div>
 
       <Card style={{ width: '30rem', margin: '2rem auto', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-      <Card.Img variant="top" src="./src/images/CardSample.png" />
+      {recipe.source === "user"
+        ?
+        <Card.Img variant="top" src="./src/images/CardSample.jpg"/>
+        :
+        <Card.Img variant="top" src={recipe.image} />
+        }
       <Card.Body>
         <Card.Title>{recipe.title}</Card.Title> 
        {recipe.favChecked ? "❤️" : "💔" }
@@ -62,6 +67,8 @@ function RecipeDetails() {
       <ListGroup.Item>Total time: {Number(recipe.preperationTime) + Number(recipe.cookingTime)}</ListGroup.Item>
       </ListGroup.Item>
 
+{/* // if source is user show ingredients as normal , else show as API ingredients */}
+{recipe.source === "user" ?
       <ListGroup className="list-group-flush" >
         <ListGroup.Item style={{display:"flex",justifyContent:"left"}}><b>Ingredients:</b> 
          <ul style={{display:"flex",justifyContent:"left", flexDirection:"column", alignContent:"center" }}>
@@ -75,6 +82,19 @@ function RecipeDetails() {
         <ListGroup.Item style={{display:"flex",justifyContent:"left"}}><b>Category: </b>{recipe.category}</ListGroup.Item>
       <ListGroup.Item style={{display:"flex",justifyContent:"left"}} ><b>Created by:</b> {recipe.source}</ListGroup.Item>
       </ListGroup>
+      :
+    <ListGroup className="list-group-flush" >
+        <ListGroup.Item style={{display:"flex",justifyContent:"left"}}><b>Ingredients:</b> 
+         </ListGroup.Item>
+   {recipe.ingredients.map((ingredient,index) => (
+            <ListGroup.Item key={index}>{ingredient.ingredient} - {ingredient.measure} </ListGroup.Item>
+          ))}
+            
+        <ListGroup.Item style={{display:"flex",justifyContent:"left"}}><b>Steps:</b> {recipe.steps}</ListGroup.Item>
+        <ListGroup.Item style={{display:"flex",justifyContent:"left"}}><b>Category: </b>{recipe.category}</ListGroup.Item>
+      <ListGroup.Item style={{display:"flex",justifyContent:"left"}} ><b>Created by:</b> {recipe.source}</ListGroup.Item>
+      </ListGroup> }
+
       <Card.Body>
      <button style={{ margin: "0.5rem" }} type="button" className="btn btn-secondary" onClick={()=>{navigate("/all-recipes")}}>
           Back

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
-import "../images/CardSample.png"
+import "../images/CardSample.jpg"
 
 function RecipeCard(props) {
 
@@ -29,7 +29,12 @@ function RecipeCard(props) {
           height: "100%",
         }}
       >
-        <Card.Img variant="top" src="./src/images/CardSample.png" />
+        {props.recipe.source === "user"
+        ?
+        <Card.Img variant="top" src="./src/images/CardSample.jpg"/>
+        :
+        <Card.Img variant="top" src={props.recipe.image} />
+        }
         <Card.Body>
           <Card.Title>{props.recipe.title}</Card.Title>
           {props.recipe.favChecked ? "❤️" : "💔" }

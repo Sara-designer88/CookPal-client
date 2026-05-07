@@ -14,11 +14,47 @@ function ApiDescription() {
   const [recipe, setRecipe] = useState(null);
   const navigate = useNavigate();
 
+      const [image, setImage] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+//  const [ingredientItems, setIngredientItems] = useState([]);
+  const [steps, setSteps] = useState("");
+  const [category, setCategory] = useState("");
+  const [source, setSource] = useState("api");
+  const [favChecked, setFavChecked] = useState(false);
+  const [preperationTime, setPreperationTime] = useState("");
+  const [cookingTime, setCookingTime] = useState("");
+  const [ ingredientsItems, setIngredientsItems] = useState([]);
 
 
-  const handleSaveRecipe =()=>{
 
-    navigate("/all-recipes")
+  const handleSaveRecipe = async (e) => {
+    e.preventDefault();
+
+    const body = {
+      image: image,
+      title: title,
+      description: description,
+      steps: steps,
+      category: category,
+      source: "api",
+      favChecked: favChecked,
+      cookingTime: cookingTime,
+      preperationTime: preperationTime,
+      ingredients: ingredients
+    };
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/recipes`,
+        body,
+      );
+      console.log("created!", response.data);
+      navigate("/all-recipes");
+    } catch (error) {
+      console.log(error);
+    }
+  
   }
 
 
@@ -34,6 +70,15 @@ function ApiDescription() {
         `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`,
       );
       setRecipe(response.data.meals[0]);
+      
+      setImage(response.data.meals[0].strMealThumb)
+      setTitle(response.data.meals[0].strMeal);
+      setDescription(response.data.meals[0].strArea);
+      setSteps(response.data.meals[0].strInstructions);
+      setCategory(response.data.meals[0].strCategory);
+      setIngredients(response.data.meals[0].strIngredient1);
+     
+      
       console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -55,7 +100,10 @@ function ApiDescription() {
       });
     }
   }
-  console.log(ingredients);
+   console.log(ingredients);
+
+  
+
 
   return (
     <div>

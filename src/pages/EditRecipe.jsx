@@ -28,6 +28,7 @@ function EditRecipe() {
   const [category, setCategory] = useState("");
   const [preperationTime, setPreperationTime] = useState("");
   const [cookingTime, setCookingTime] = useState("");
+  const [source, setSource] = useState("user");
 
 
 
@@ -50,6 +51,7 @@ function EditRecipe() {
       setFavChecked(response.data.favChecked)
       setCookingTime(response.data.cookingTime)
       setPreperationTime(response.data.preperationTime)
+      setSource(response.data.source)
     
     } catch (error) {
       console.log(error);
@@ -70,6 +72,7 @@ function EditRecipe() {
       favChecked:favChecked,
       preperationTime:preperationTime,
       cookingTime:cookingTime,
+      source:source
     };
 
     try {
@@ -235,6 +238,7 @@ function EditRecipe() {
           Add to ingredients{" "}
         </button>
 
+{source === "user" ?
         <InputGroup className="mb-4">
           <InputGroup.Text>Ingredients</InputGroup.Text>
           <div
@@ -287,6 +291,60 @@ function EditRecipe() {
             )}
           </div>
         </InputGroup>
+
+        :
+
+        <InputGroup className="mb-4">
+          <InputGroup.Text>Ingredients</InputGroup.Text>
+          <div
+            style={{
+              border: "1px solid #ced4da",
+              borderRadius: "0.375rem",
+              padding: "0.375rem 0.75rem",
+              minHeight: "100px",
+              width: "100%",
+              backgroundColor: "#fff",
+              fontSize: "0.875rem",
+            }}
+            className="form-control"
+          >
+            {ingredients.length === 0 ? (
+              <div style={{ color: "#6c757d", fontStyle: "italic" }}>
+                No ingredients added yet
+              </div>
+            ) : ingredients.map((item, index) => (
+                <div
+                  key={index}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "0.25rem 0",
+                  }}
+                >
+                  <div>
+                    <strong>{item.ingredient}</strong> - {item.measure}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => deleteIngredient(index)}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "#dc3545",
+                      cursor: "pointer",
+                      fontSize: "1.2rem",
+                      padding: "0 0.25rem",
+                    }}
+                    title="Remove ingredient"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+          </div>
+        </InputGroup>
+          }
 
         <InputGroup className="mb-4">
           <InputGroup.Text>Steps</InputGroup.Text>
