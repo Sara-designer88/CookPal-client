@@ -23,8 +23,18 @@ function AddRecipe() {
   const [category, setCategory] = useState("");
   const [source, setSource] = useState("user");
   const [favChecked, setFavChecked] = useState(false);
+  const [preperationTime,setPreperationTime] = useState("")
+  const [cookingTime,setCookingTime] = useState("")
+  
 
   const navigate = useNavigate();
+
+
+
+  
+  const totalTime = Number(preperationTime) + Number(cookingTime)
+
+ 
 
   // function to add ingredient to the list of ingredients
   const addIngredient = () => {
@@ -63,6 +73,9 @@ function AddRecipe() {
       category: category,
       source: source,
       favChecked: favChecked,
+      cookingTime:cookingTime,
+      preperationTime :preperationTime,
+      totalTime : totalCalculation
     };
 
     try {
@@ -106,6 +119,51 @@ function AddRecipe() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
+        </InputGroup>
+
+        <InputGroup className="mb-4">
+          <InputGroup.Text id="inputGroup-sizing-default">
+            Preperation time
+          </InputGroup.Text>
+          <Form.Control
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+            value={preperationTime}
+            onChange={(e) => setPreperationTime(e.target.value)}
+          />
+          <InputGroup.Text id="inputGroup-sizing-default">
+            Minutes
+          </InputGroup.Text>
+        </InputGroup>
+
+         <InputGroup className="mb-4">
+          <InputGroup.Text id="inputGroup-sizing-default">
+            Cooking time 
+          </InputGroup.Text>
+          <Form.Control
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+            value={cookingTime}
+            onChange={(e) => setCookingTime(e.target.value)}
+          />
+          <InputGroup.Text id="inputGroup-sizing-default">
+            Minutes
+          </InputGroup.Text>
+        </InputGroup>
+
+         <InputGroup className="mb-4">
+          <InputGroup.Text id="inputGroup-sizing-default">
+            Total Time 
+          </InputGroup.Text>
+          <Form.Control
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+            value={totalTime}
+            disabled
+          /> 
+          <InputGroup.Text id="inputGroup-sizing-default">
+            Minutes
+          </InputGroup.Text>
         </InputGroup>
 
         <InputGroup className="mb-2">
@@ -211,6 +269,8 @@ function AddRecipe() {
             onChange={(e) => setSteps(e.target.value)}
           />
         </InputGroup>
+
+         
 
         <Form.Select
           className="mb-4"
