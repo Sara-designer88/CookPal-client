@@ -5,6 +5,7 @@ import AddRecipe from "../components/AddRecipe"
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import img from "../images/CookPal-header.jpg"
 
 
 
@@ -13,7 +14,7 @@ function HomePage() {
   return (
     <div>
 
-      <img src="./src/images/CookPal-header.jpg" alt="CookPal Logo" className="header-image" />
+      <img src="./src/images/CookPal-header.jpg" alt="CookPal header" className="header-image" />
     
       <Container style={{margin: "2rem 2rem 4rem auto"}}>
       <p>Welcome to CookPal, your ultimate cooking companion! Whether you're a seasoned chef or just starting out in the kitchen, CookPal is here to help you discover new recipes, organize your favorite dishes, and share your culinary creations with friends and family. Explore our extensive recipe collection, create personalized meal plans, and connect with a vibrant community of food enthusiasts. Let's get cooking with CookPal!</p>

@@ -81,7 +81,7 @@ function RecipeList() {
               onClick={() => setActiveTab("api")}
               active={activeTab === "api"}
             >
-              API Recipes
+              Saved Recipes
             </Nav.Link>
           </Nav>
         </Container>
@@ -102,12 +102,17 @@ function RecipeList() {
           <option value="Breakfast">Breakfast</option>
           <option value="Brunch">Brunch</option>
           <option value="Lunch">Lunch</option>
+          <option value="Chicken">Chicken</option>
+          <option value="Beef">Beef</option>
+          <option value="Seafood">Seafood</option>
           <option value="Dinner">Dinner</option>
           <option value="Dessert">Dessert</option>
           <option value="Snack">Snack</option>
-          <option value="Vegan">Vegan</option>
+           <option value="Vegetarian">Vegetarian</option>
           <option value="Drinks">Drinks</option>
+            <option value="Side">Side</option>
           <option value="Others">Others</option>
+      
         </Form.Select>
 
         {/* <Form.Select >
@@ -123,7 +128,8 @@ function RecipeList() {
           flexWrap: "wrap",
           justifyContent:"space-around",
           alignContent:"center",
-          gap: '1rem'
+          gap: '1rem',
+          margin: '2rem'
         }}
       >
         {displayedRecipes.length === 0 ? (

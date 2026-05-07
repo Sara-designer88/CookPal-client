@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
+import "../images/CardSample.png"
 
 function RecipeCard(props) {
 

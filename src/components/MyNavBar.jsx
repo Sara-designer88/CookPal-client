@@ -4,6 +4,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavbarBrand from 'react-bootstrap/NavbarBrand'
 import NavbarToggle from 'react-bootstrap/NavbarToggle'
 import { Link } from 'react-router-dom';
+import "../images/CookPal-logo.png"
+import "../images/CookPal-header.jpg"
 
 
 function MyNavBar() {
@@ -19,9 +21,9 @@ function MyNavBar() {
             <Nav.Link as={Link} to="/all-recipes">
              All Recipes
             </Nav.Link>
-            {/* <Nav.Link as={Link} to="/my-recipes">
-             My Recipes
-            </Nav.Link> */}
+            <Nav.Link as={Link} to="/api-Recipes">
+             Discover Recipes 
+            </Nav.Link>
             <Nav.Link as={Link} to="/favorites">
              Favorites
             </Nav.Link>

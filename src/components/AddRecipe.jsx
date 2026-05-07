@@ -10,7 +10,7 @@ import Badge from "react-bootstrap/Badge";
 import { ToggleButton } from "react-bootstrap";
 
 function AddRecipe() {
-  const [ image , setImage] = useState(null)
+  const [image, setImage] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [ingredient, setIngredient] = useState({
@@ -23,18 +23,13 @@ function AddRecipe() {
   const [category, setCategory] = useState("");
   const [source, setSource] = useState("user");
   const [favChecked, setFavChecked] = useState(false);
-  const [preperationTime,setPreperationTime] = useState("")
-  const [cookingTime,setCookingTime] = useState("")
-  
+  const [preperationTime, setPreperationTime] = useState("");
+  const [cookingTime, setCookingTime] = useState("");
+ 
 
   const navigate = useNavigate();
 
-
-
-  
-  const totalTime = Number(preperationTime) + Number(cookingTime)
-
- 
+  const total = Number(preperationTime) + Number(cookingTime);
 
   // function to add ingredient to the list of ingredients
   const addIngredient = () => {
@@ -71,11 +66,11 @@ function AddRecipe() {
       ingredients: ingredients,
       steps: steps,
       category: category,
-      source: source,
+      source: "user",
       favChecked: favChecked,
-      cookingTime:cookingTime,
-      preperationTime :preperationTime,
-      totalTime : totalCalculation
+      cookingTime: cookingTime,
+      preperationTime: preperationTime,
+     
     };
 
     try {
@@ -136,9 +131,9 @@ function AddRecipe() {
           </InputGroup.Text>
         </InputGroup>
 
-         <InputGroup className="mb-4">
+        <InputGroup className="mb-4">
           <InputGroup.Text id="inputGroup-sizing-default">
-            Cooking time 
+            Cooking time
           </InputGroup.Text>
           <Form.Control
             aria-label="Default"
@@ -151,16 +146,16 @@ function AddRecipe() {
           </InputGroup.Text>
         </InputGroup>
 
-         <InputGroup className="mb-4">
+        <InputGroup className="mb-4">
           <InputGroup.Text id="inputGroup-sizing-default">
-            Total Time 
+            Total Time
           </InputGroup.Text>
           <Form.Control
             aria-label="Default"
             aria-describedby="inputGroup-sizing-default"
-            value={totalTime}
+            value={total}
             disabled
-          /> 
+          />
           <InputGroup.Text id="inputGroup-sizing-default">
             Minutes
           </InputGroup.Text>
@@ -270,8 +265,6 @@ function AddRecipe() {
           />
         </InputGroup>
 
-         
-
         <Form.Select
           className="mb-4"
           value={category}
@@ -281,11 +274,15 @@ function AddRecipe() {
           <option value="Breakfast">Breakfast</option>
           <option value="Brunch">Brunch</option>
           <option value="Lunch">Lunch</option>
+          <option value="Chicken">Chicken</option>
+          <option value="Beef">Beef</option>
+          <option value="Seafood">Seafood</option>
           <option value="Dinner">Dinner</option>
           <option value="Dessert">Dessert</option>
           <option value="Snack">Snack</option>
-          <option value="Vegan">Vegan</option>
+           <option value="Vegetarian">Vegetarian</option>
           <option value="Drinks">Drinks</option>
+            <option value="Side">Side</option>
           <option value="Others">Others</option>
         </Form.Select>
 
@@ -296,8 +293,10 @@ function AddRecipe() {
           variant="outline-primary"
           checked={favChecked}
           value="1"
-          onChange={async (e) => {setFavChecked(e.target.checked)}}
-          >
+          onChange={async (e) => {
+            setFavChecked(e.target.checked);
+          }}
+        >
           {favChecked ? "❤️" : "Add to 💔"}
         </ToggleButton>
 

@@ -12,6 +12,7 @@ function EditRecipe() {
   const { recipeId } = useParams();
   const navigate = useNavigate();
 
+
   const [favChecked, setFavChecked] = useState(false);
 
   const [ image, setImage]= useState(null)
@@ -25,6 +26,9 @@ function EditRecipe() {
   const [ingredients, setIngredients] = useState([]);
   const [steps, setSteps] = useState("");
   const [category, setCategory] = useState("");
+  const [preperationTime, setPreperationTime] = useState("");
+  const [cookingTime, setCookingTime] = useState("");
+
 
 
   /*************************** */
@@ -44,6 +48,9 @@ function EditRecipe() {
       setSteps(response.data.steps);
       setCategory(response.data.category);
       setFavChecked(response.data.favChecked)
+      setCookingTime(response.data.cookingTime)
+      setPreperationTime(response.data.preperationTime)
+    
     } catch (error) {
       console.log(error);
     }
@@ -60,7 +67,9 @@ function EditRecipe() {
       ingredients: ingredients,
       steps: steps,
       category: category,
-      favChecked:favChecked
+      favChecked:favChecked,
+      preperationTime:preperationTime,
+      cookingTime:cookingTime,
     };
 
     try {
@@ -138,6 +147,51 @@ function EditRecipe() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
+        </InputGroup>
+
+        <InputGroup className="mb-4">
+          <InputGroup.Text id="inputGroup-sizing-default">
+            Preperation time
+          </InputGroup.Text>
+          <Form.Control
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+            value={preperationTime}
+            onChange={(e) => setPreperationTime(e.target.value)}
+          />
+          <InputGroup.Text id="inputGroup-sizing-default">
+            Minutes
+          </InputGroup.Text>
+        </InputGroup>
+
+         <InputGroup className="mb-4">
+          <InputGroup.Text id="inputGroup-sizing-default">
+            Cooking time
+          </InputGroup.Text>
+          <Form.Control
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+            value={cookingTime}
+            onChange={(e) => setCookingTime(e.target.value)}
+          />
+          <InputGroup.Text id="inputGroup-sizing-default">
+            Minutes
+          </InputGroup.Text>
+        </InputGroup>
+
+        <InputGroup className="mb-4">
+          <InputGroup.Text id="inputGroup-sizing-default">
+            Total Time
+          </InputGroup.Text>
+          <Form.Control
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+            value={Number(preperationTime) + Number(cookingTime)}
+            disabled
+          />
+          <InputGroup.Text id="inputGroup-sizing-default">
+            Minutes
+          </InputGroup.Text>
         </InputGroup>
 
         <InputGroup className="mb-2">
@@ -253,11 +307,15 @@ function EditRecipe() {
           <option value="Breakfast">Breakfast</option>
           <option value="Brunch">Brunch</option>
           <option value="Lunch">Lunch</option>
+          <option value="Chicken">Chicken</option>
+          <option value="Beef">Beef</option>
+          <option value="Seafood">Seafood</option>
           <option value="Dinner">Dinner</option>
           <option value="Dessert">Dessert</option>
-                <option value="Snack">Snack</option>
-          <option value="Vegan">Vegan</option>
+          <option value="Snack">Snack</option>
+           <option value="Vegetarian">Vegetarian</option>
           <option value="Drinks">Drinks</option>
+            <option value="Side">Side</option>
           <option value="Others">Others</option>
         </Form.Select>
 
