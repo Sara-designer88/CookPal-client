@@ -5,7 +5,9 @@ import AddRecipe from "../components/AddRecipe"
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import img from "../images/CookPal-header.jpg"
+import "../images/CardSample.jpg"
+import "../images/CookPal-logo.png"
+import "../images/CookPal-header.jpg"
 
 
 

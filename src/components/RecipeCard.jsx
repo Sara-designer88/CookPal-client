@@ -5,6 +5,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
 import "../images/CardSample.jpg"
+import "../images/CookPal-logo.png"
+import "../images/CookPal-header.jpg"
 
 function RecipeCard(props) {
 

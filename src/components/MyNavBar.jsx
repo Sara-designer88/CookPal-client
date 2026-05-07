@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavbarBrand from 'react-bootstrap/NavbarBrand'
 import NavbarToggle from 'react-bootstrap/NavbarToggle'
 import { Link } from 'react-router-dom';
+import "../images/CardSample.jpg"
 import "../images/CookPal-logo.png"
 import "../images/CookPal-header.jpg"
 

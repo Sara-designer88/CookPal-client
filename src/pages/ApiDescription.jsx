@@ -5,8 +5,10 @@ import { useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import { ToggleButton } from "react-bootstrap";
-import "../images/CardSample.png";
 import { Link } from "react-router-dom";
+import "../images/CardSample.jpg"
+import "../images/CookPal-logo.png"
+import "../images/CookPal-header.jpg"
 
 function ApiDescription() {
   const { recipeId } = useParams();

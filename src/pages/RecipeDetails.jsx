@@ -6,6 +6,8 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { ToggleButton} from 'react-bootstrap';
 import "../images/CardSample.jpg"
+import "../images/CookPal-logo.png"
+import "../images/CookPal-header.jpg"
 
 
 

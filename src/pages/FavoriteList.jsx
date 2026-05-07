@@ -11,6 +11,9 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import "../images/CardSample.jpg"
+import "../images/CookPal-logo.png"
+import "../images/CookPal-header.jpg"
 
 import { Dropdown } from "bootstrap";
 import DropdownButton from "react-bootstrap/DropdownButton";

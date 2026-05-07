@@ -8,6 +8,9 @@ import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
 import RecipeCardAPI from "../components/RecipeCardAPI";
 import Form from "react-bootstrap/Form";
+import "../images/CardSample.jpg"
+import "../images/CookPal-logo.png"
+import "../images/CookPal-header.jpg"
 
 
 
