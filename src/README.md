@@ -39,13 +39,13 @@ CookPal is a recipe management web application where users can create, view, edi
 ## 📸 Screenshots
 
 ### Home Page
-![Home Page](./public/screenshots/home.png)
+![Home Page](../images/screenshots/home.png)
 
 ### Recipes
-![Recipe Details](./public/screenshots/recipe.png)
+![Recipe Details](../images/screenshots/recipe.png)
 
 ### Recipe Details
-![Recipe Details](./public/screenshots/recipeDetails.png)
+![Recipe Details](../images/screenshots/recipeDetails.png)
 
 ---
 

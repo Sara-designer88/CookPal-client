@@ -12,7 +12,6 @@ import header from "../images/CookPal-header.jpg"
 
 function ApiDescription() {
   const { recipeId } = useParams();
-  console.log(recipeId);
   const [recipe, setRecipe] = useState(null);
   const navigate = useNavigate();
 
@@ -51,7 +50,6 @@ function ApiDescription() {
         `${import.meta.env.VITE_SERVER_URL}/recipes`,
         body,
       );
-      console.log("created!", response.data);
       navigate("/all-recipes");
     } catch (error) {
       console.log(error);
@@ -79,9 +77,7 @@ function ApiDescription() {
       setSteps(response.data.meals[0].strInstructions);
       setCategory(response.data.meals[0].strCategory);
       setIngredients(response.data.meals[0].strIngredient1);
-     
-      
-      console.log(response.data);
+  
     } catch (error) {
       console.error(error);
     }
@@ -102,9 +98,6 @@ function ApiDescription() {
       });
     }
   }
-   console.log(ingredients);
-
-  
 
 
   return (

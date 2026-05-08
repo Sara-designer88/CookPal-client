@@ -40,7 +40,6 @@ function RecipeDetails() {
       const response = await axios.delete(
         `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
       );
-      console.log("deleted!", response.data);
       navigate("/all-recipes");
     } catch (error) {
       console.log(error);

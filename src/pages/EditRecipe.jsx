@@ -83,7 +83,6 @@ function EditRecipe() {
         `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
         body,
       );
-      console.log("updated!", response.data);
       navigate("/recipes/" + recipeId);
     } catch (error) {
       console.log(error);

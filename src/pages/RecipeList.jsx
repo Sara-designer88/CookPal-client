@@ -50,7 +50,6 @@ function RecipeList() {
         `${import.meta.env.VITE_SERVER_URL}/recipes`,
       );
       setRecipes(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }

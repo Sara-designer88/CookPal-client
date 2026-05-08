@@ -34,12 +34,10 @@ function ApiList() {
   const handleSearch = async (e) => {
     let search = e.target.value
     setSearchQuery(search)
-    console.log(search)
 
     try {
       const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery}`);
       setRecipes(response.data.meals);
-      console.log(response.data.meals);
     } catch (error) {
       console.error(error);
     }
@@ -59,7 +57,6 @@ function ApiList() {
     try {
       const response = await axios.get("https://www.themealdb.com/api/json/v1/1/search.php?s=");
       setRecipes(response.data.meals);
-      console.log(response.data.meals);
     } catch (error) {
       console.error(error);
     }

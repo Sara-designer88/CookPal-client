@@ -78,7 +78,6 @@ function AddRecipe() {
         `${import.meta.env.VITE_SERVER_URL}/recipes`,
         body,
       );
-      console.log("created!", response.data);
       navigate("/all-recipes");
     } catch (error) {
       console.log(error);
