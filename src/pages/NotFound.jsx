@@ -1,11 +1,11 @@
 
-import "../images/error.jpg"
+import error from "../images/error.jpg"
 function NotFound() {
   return (
     <div>
       
 
-      <img src="./src/images/error.jpg" alt="Not found" className="header-image" />
+      <img src={error} alt="Not found" className="header-image" />
 
     </div>
   )

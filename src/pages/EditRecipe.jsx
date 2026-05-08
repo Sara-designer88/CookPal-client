@@ -6,9 +6,9 @@ import axios from "axios";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import { ToggleButton} from 'react-bootstrap';
-import "../images/CardSample.jpg"
-import "../images/CookPal-logo.png"
-import "../images/CookPal-header.jpg"
+import sample from "../images/CardSample.jpg"
+import logo from "../images/CookPal-logo.png"
+import header from "../images/CookPal-header.jpg"
 
 
 function EditRecipe() {

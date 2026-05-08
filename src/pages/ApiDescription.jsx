@@ -6,9 +6,9 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import { ToggleButton } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import "../images/CardSample.jpg"
-import "../images/CookPal-logo.png"
-import "../images/CookPal-header.jpg"
+import sample from "../images/CardSample.jpg"
+import logo from "../images/CookPal-logo.png"
+import header from "../images/CookPal-header.jpg"
 
 function ApiDescription() {
   const { recipeId } = useParams();

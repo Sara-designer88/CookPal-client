@@ -2,9 +2,8 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
-import "../images/CardSample.jpg"
-import "../images/CookPal-logo.png"
-import "../images/CookPal-header.jpg"
+import sample from "../images/CardSample.jpg"
+
 
 function RecipeCardAPI(props) {
   const navigate = useNavigate();

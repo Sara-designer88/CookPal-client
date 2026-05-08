@@ -4,9 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
-import "../images/CardSample.jpg"
-import "../images/CookPal-logo.png"
-import "../images/CookPal-header.jpg"
+import sample from "../images/CardSample.jpg"
+
 
 function RecipeCard(props) {
 
@@ -33,7 +32,7 @@ function RecipeCard(props) {
       >
         {props.recipe.source === "user"
         ?
-        <Card.Img variant="top" src="./src/images/CardSample.jpg"/>
+        <Card.Img variant="top" src={sample}/>
         :
         <Card.Img variant="top" src={props.recipe.image} />
         }

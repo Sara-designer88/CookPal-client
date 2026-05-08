@@ -4,9 +4,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavbarBrand from 'react-bootstrap/NavbarBrand'
 import NavbarToggle from 'react-bootstrap/NavbarToggle'
 import { Link } from 'react-router-dom';
-import "../images/CardSample.jpg"
-import "../images/CookPal-logo.png"
-import "../images/CookPal-header.jpg"
+import sample from "../images/CardSample.jpg"
+import logo from "../images/CookPal-logo.png"
+import header from "../images/CookPal-header.jpg"
 
 
 function MyNavBar() {
@@ -14,7 +14,7 @@ function MyNavBar() {
     <Navbar expand="sm" className="bg-body-tertiary" >
       <Container>
         <Navbar.Brand as={Link} to="/">
-         <img src="./src/images/CookPal-logo.png" alt="CookPal Logo" className='navbar-brand' width={160} height={100} />
+         <img src={logo} alt="CookPal Logo" className='navbar-brand' width={160} height={100} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
