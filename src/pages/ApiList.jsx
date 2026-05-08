@@ -118,7 +118,6 @@ function ApiList() {
           justifyContent:"space-around",
           alignContent:"center",
           gap: '1rem',
-          
         }}
       >
         {displayedRecipes.length === 0 ? (

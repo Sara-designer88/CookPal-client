@@ -5,20 +5,18 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
-import { ToggleButton} from 'react-bootstrap';
-import sample from "../images/CardSample.jpg"
-import logo from "../images/CookPal-logo.png"
-import header from "../images/CookPal-header.jpg"
-
+import { ToggleButton } from "react-bootstrap";
+import sample from "../images/CardSample.jpg";
+import logo from "../images/CookPal-logo.png";
+import header from "../images/CookPal-header.jpg";
 
 function EditRecipe() {
   const { recipeId } = useParams();
   const navigate = useNavigate();
 
-
   const [favChecked, setFavChecked] = useState(false);
 
-  const [ image, setImage]= useState(null)
+  const [image, setImage] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [ingredient, setIngredient] = useState({
@@ -32,8 +30,6 @@ function EditRecipe() {
   const [preperationTime, setPreperationTime] = useState("");
   const [cookingTime, setCookingTime] = useState("");
   const [source, setSource] = useState("user");
-
-
 
   /*************************** */
   useEffect(() => {
@@ -51,11 +47,10 @@ function EditRecipe() {
       setIngredients(response.data.ingredients);
       setSteps(response.data.steps);
       setCategory(response.data.category);
-      setFavChecked(response.data.favChecked)
-      setCookingTime(response.data.cookingTime)
-      setPreperationTime(response.data.preperationTime)
-      setSource(response.data.source)
-    
+      setFavChecked(response.data.favChecked);
+      setCookingTime(response.data.cookingTime);
+      setPreperationTime(response.data.preperationTime);
+      setSource(response.data.source);
     } catch (error) {
       console.log(error);
     }
@@ -72,10 +67,10 @@ function EditRecipe() {
       ingredients: ingredients,
       steps: steps,
       category: category,
-      favChecked:favChecked,
-      preperationTime:preperationTime,
-      cookingTime:cookingTime,
-      source:source
+      favChecked: favChecked,
+      preperationTime: preperationTime,
+      cookingTime: cookingTime,
+      source: source,
     };
 
     try {
@@ -115,10 +110,11 @@ function EditRecipe() {
   /***************** */
   return (
     <div>
-      <h2 style={{ marginTop: '4rem', marginBottom: '2rem' }}>Edit Recipe</h2>
+      <h2 style={{ marginTop: "4rem", marginBottom: "2rem" }}>Edit Recipe</h2>
 
-      <form style={{margin:"2rem"}}>
-           <InputGroup className="mb-2" style={{ marginTop: "2rem" }}>
+      <form style={{ margin: "2rem" }}>
+        
+        {/* <InputGroup className="mb-2" style={{ marginTop: "2rem" }}>
           <InputGroup.Text id="inputGroup-sizing-default">
             Upload Image
           </InputGroup.Text>
@@ -128,7 +124,7 @@ function EditRecipe() {
             value={image}
             onChange={(e) => setImage(e.target.value)}
           />
-        </InputGroup>
+        </InputGroup> */}
 
         <InputGroup className="mb-4" style={{ marginTop: "2rem" }}>
           <InputGroup.Text id="inputGroup-sizing-default">
@@ -169,7 +165,7 @@ function EditRecipe() {
           </InputGroup.Text>
         </InputGroup>
 
-         <InputGroup className="mb-4">
+        <InputGroup className="mb-4">
           <InputGroup.Text id="inputGroup-sizing-default">
             Cooking time
           </InputGroup.Text>
@@ -240,113 +236,113 @@ function EditRecipe() {
           Add to ingredients{" "}
         </button>
 
-{source === "user" ?
-        <InputGroup className="mb-4">
-          <InputGroup.Text>Ingredients</InputGroup.Text>
-          <div
-            style={{
-              border: "1px solid #ced4da",
-              borderRadius: "0.375rem",
-              padding: "0.375rem 0.75rem",
-              minHeight: "100px",
-              width: "100%",
-              backgroundColor: "#fff",
-              fontSize: "0.875rem",
-            }}
-            className="form-control"
-          >
-            {ingredients.length === 0 ? (
-              <div style={{ color: "#6c757d", fontStyle: "italic" }}>
-                No ingredients added yet
-              </div>
-            ) : (
-              ingredients.map((item, index) => (
-                <div
-                  key={index}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: "0.25rem 0",
-                  }}
-                >
-                  <div>
-                    <strong>{item.name}</strong> - {item.quantity} {item.unit}
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => deleteIngredient(index)}
-                    style={{
-                      background: "none",
-                      border: "none",
-                      color: "#dc3545",
-                      cursor: "pointer",
-                      fontSize: "1.2rem",
-                      padding: "0 0.25rem",
-                    }}
-                    title="Remove ingredient"
-                  >
-                    ×
-                  </button>
+        {source === "user" ? (
+          <InputGroup className="mb-4">
+            <InputGroup.Text>Ingredients</InputGroup.Text>
+            <div
+              style={{
+                border: "1px solid #ced4da",
+                borderRadius: "0.375rem",
+                padding: "0.375rem 0.75rem",
+                minHeight: "100px",
+                width: "100%",
+                backgroundColor: "#fff",
+                fontSize: "0.875rem",
+              }}
+              className="form-control"
+            >
+              {ingredients.length === 0 ? (
+                <div style={{ color: "#6c757d", fontStyle: "italic" }}>
+                  No ingredients added yet
                 </div>
-              ))
-            )}
-          </div>
-        </InputGroup>
-
-        :
-
-        <InputGroup className="mb-4">
-          <InputGroup.Text>Ingredients</InputGroup.Text>
-          <div
-            style={{
-              border: "1px solid #ced4da",
-              borderRadius: "0.375rem",
-              padding: "0.375rem 0.75rem",
-              minHeight: "100px",
-              width: "100%",
-              backgroundColor: "#fff",
-              fontSize: "0.875rem",
-            }}
-            className="form-control"
-          >
-            {ingredients.length === 0 ? (
-              <div style={{ color: "#6c757d", fontStyle: "italic" }}>
-                No ingredients added yet
-              </div>
-            ) : ingredients.map((item, index) => (
-                <div
-                  key={index}
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: "0.25rem 0",
-                  }}
-                >
-                  <div>
-                    <strong>{item.ingredient}</strong> - {item.measure}
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => deleteIngredient(index)}
+              ) : (
+                ingredients.map((item, index) => (
+                  <div
+                    key={index}
                     style={{
-                      background: "none",
-                      border: "none",
-                      color: "#dc3545",
-                      cursor: "pointer",
-                      fontSize: "1.2rem",
-                      padding: "0 0.25rem",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      padding: "0.25rem 0",
                     }}
-                    title="Remove ingredient"
                   >
-                    ×
-                  </button>
+                    <div>
+                      <strong>{item.name}</strong> - {item.quantity} {item.unit}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => deleteIngredient(index)}
+                      style={{
+                        background: "none",
+                        border: "none",
+                        color: "#dc3545",
+                        cursor: "pointer",
+                        fontSize: "1.2rem",
+                        padding: "0 0.25rem",
+                      }}
+                      title="Remove ingredient"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))
+              )}
+            </div>
+          </InputGroup>
+        ) : (
+          <InputGroup className="mb-4">
+            <InputGroup.Text>Ingredients</InputGroup.Text>
+            <div
+              style={{
+                border: "1px solid #ced4da",
+                borderRadius: "0.375rem",
+                padding: "0.375rem 0.75rem",
+                minHeight: "100px",
+                width: "100%",
+                backgroundColor: "#fff",
+                fontSize: "0.875rem",
+              }}
+              className="form-control"
+            >
+              {ingredients.length === 0 ? (
+                <div style={{ color: "#6c757d", fontStyle: "italic" }}>
+                  No ingredients added yet
                 </div>
-              ))}
-          </div>
-        </InputGroup>
-          }
+              ) : (
+                ingredients.map((item, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      padding: "0.25rem 0",
+                    }}
+                  >
+                    <div>
+                      <strong>{item.ingredient}</strong> - {item.measure}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => deleteIngredient(index)}
+                      style={{
+                        background: "none",
+                        border: "none",
+                        color: "#dc3545",
+                        cursor: "pointer",
+                        fontSize: "1.2rem",
+                        padding: "0 0.25rem",
+                      }}
+                      title="Remove ingredient"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))
+              )}
+            </div>
+          </InputGroup>
+        )}
 
         <InputGroup className="mb-4">
           <InputGroup.Text>Steps</InputGroup.Text>
@@ -373,40 +369,39 @@ function EditRecipe() {
           <option value="Dinner">Dinner</option>
           <option value="Dessert">Dessert</option>
           <option value="Snack">Snack</option>
-           <option value="Vegetarian">Vegetarian</option>
+          <option value="Vegetarian">Vegetarian</option>
           <option value="Drinks">Drinks</option>
-            <option value="Side">Side</option>
+          <option value="Side">Side</option>
           <option value="Others">Others</option>
         </Form.Select>
 
- <button
-          style={{ margin:" 1rem "}}
-            type="button"
-            className="btn btn-secondary"
-            onClick={() => {
-              navigate("/recipes/" + recipeId);
-            }}
-          >
-            Back
-          </button> 
-          
-<ToggleButton
-       style={{margin:"1rem"}}
-        id="toggle-check"
-        type="checkbox"
-        variant="outline-primary"
-        checked={favChecked}
-        value="1"
-        onChange={async (e) => {setFavChecked(e.target.checked)}}
-      >
-        {favChecked ? "❤️" : "Add to 💔" }
-     </ToggleButton>
+        <button
+          style={{ margin: " 1rem " }}
+          type="button"
+          className="btn btn-secondary"
+          onClick={() => {
+            navigate("/recipes/" + recipeId);
+          }}
+        >
+          Back
+        </button>
 
-         
-  
+        <ToggleButton
+          style={{ margin: "1rem" }}
+          id="toggle-check"
+          type="checkbox"
+          variant="outline-primary"
+          checked={favChecked}
+          value="1"
+          onChange={async (e) => {
+            setFavChecked(e.target.checked);
+          }}
+        >
+          {favChecked ? "❤️" : "Add to 💔"}
+        </ToggleButton>
 
         <button
-          style={{ margin:" 1rem " }}
+          style={{ margin: " 1rem " }}
           className="btn btn-primary"
           onClick={handleFormSubmit}
         >

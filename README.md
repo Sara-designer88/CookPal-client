@@ -1,16 +1,137 @@
-# React + Vite
+# 🍳 CookPal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+CookPal is a recipe management web application where users can create, view, edit, and delete recipes. Browse Recipes from API and save it to their own recipes to be edit them later. 
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Features
 
-## React Compiler
+- Create recipes
+- View all recipes
+- Recipe details page
+- Edit recipes
+- Delete recipes
+- Responsive UI
+- Loading states and confirmations
+- REST API integration
+- Save Recipes from API 
+- Filter by category and by source
+- Search specific title from API 
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend
+- React
+- React Bootstrap
+- Axios
+- React Router DOM
+- Vite
+
+### Backend
+- Node.js
+- Express.js
+
+
+---
+
+## 📸 Screenshots
+
+### Home Page
+![Home Page](./public/screenshots/home.png)
+
+### Recipes
+![Recipe Details](./public/screenshots/recipe.png)
+
+### Recipe Details
+![Recipe Details](./public/screenshots/recipeDetails.png)
+
+---
+## 🔗 Live Demo
+
+[CookPal App](https://cookpal-flame.vercel.app/)
+
+---
+
+## ⚙️ Installation
+
+### Clone the repository
+
+```bash
+git clone <https://github.com/Sara-designer88/CookPal-client.git>
+```
+
+### Navigate to project
+
+```bash
+cd cookpal
+```
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Start development server
+
+```bash
+npm run dev
+```
+
+---
+
+## 🔑 Environment Variables
+
+Create a `.env` file:
+
+```env
+VITE_SERVER_URL=http://localhost:5005
+```
+
+---
+
+## 📂 Project Structure
+
+```bash
+src/
+ ├── components/
+ ├── pages/
+ ├── images/
+ ├── App.jsx
+ └── main.jsx
+```
+
+---
+
+## 🌐 API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | /recipes | Get all recipes |
+| GET | /recipes/:id | Get single recipe |
+| POST | /recipes | Create recipe |
+| PUT | /recipes/:id | Update recipe |
+| DELETE | /recipes/:id | Delete recipe |
+
+---
+
+## 🚀 Deployment
+
+Frontend deployed on Vercel  
+Backend deployed on Render
+
+---
+
+## ✨ Future Improvements
+
+- Authentication
+- Image upload
+- Dark mode
+
+---
+
+## 👨‍💻 Author
+
+sara faltas
