@@ -10,6 +10,7 @@ import RecipeCardAPI from "../components/RecipeCardAPI";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Spinner from 'react-bootstrap/Spinner';
 import Button from "react-bootstrap/Button";
 import sample from "../images/CardSample.jpg"
 import logo from "../images/CookPal-logo.png"
@@ -44,7 +45,7 @@ function ApiList() {
     }
   };
   
-  
+
 
     //this to filter by recipe category from the selected base recipe
 
@@ -65,7 +66,18 @@ function ApiList() {
   };
 
   // if there are no recipes, show loading message
-  if (!recipes) return <h3>Loading...</h3>;
+  if (!recipes) return (
+  <Button disabled>
+  <Spinner
+    as="span"
+    animation="border"
+    size="sm"
+    role="status"
+    aria-hidden="true"
+  />
+  {' '}Loading...
+</Button>
+  )
 
  const displayedRecipes = recipes.filter((recipe) => {
     return category ? recipe.strCategory === category : true;
@@ -112,9 +124,13 @@ function ApiList() {
           margin: '2rem'
         }}
       >
-        {displayedRecipes.map((recipe) => {
+        {displayedRecipes.length === 0 ? (
+          <p>Sorry no recipes found</p>
+        ) : (
+        displayedRecipes.map((recipe) => {
             return <RecipeCardAPI key={recipe.idMeal} recipe={recipe} />;
-        })}
+}))
+    }
         </div>
     </div>
   );

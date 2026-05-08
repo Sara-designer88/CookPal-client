@@ -14,6 +14,7 @@ import Button from "react-bootstrap/Button";
 import sample from "../images/CardSample.jpg"
 import logo from "../images/CookPal-logo.png"
 import header from "../images/CookPal-header.jpg"
+import Spinner from 'react-bootstrap/Spinner';
 
 import { Dropdown } from "bootstrap";
 import DropdownButton from "react-bootstrap/DropdownButton";
@@ -56,7 +57,18 @@ function RecipeList() {
   };
 
   // if there are no recipes, show loading message
-  if (!recipes) return <h3>Loading...</h3>;
+  if (!recipes) return (
+  <Button disabled>
+  <Spinner
+    as="span"
+    animation="border"
+    size="sm"
+    role="status"
+    aria-hidden="true"
+  />
+  {' '}Loading...
+</Button>
+  )
 
   return (
     <div>

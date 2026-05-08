@@ -1,42 +1,45 @@
-import axios from "axios"
-import { useNavigate } from "react-router-dom"
-import { use, useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
-import { ToggleButton} from 'react-bootstrap';
-import sample from "../images/CardSample.jpg"
-import logo from "../images/CookPal-logo.png"
-import header from "../images/CookPal-header.jpg"
-
-
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { use, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
+import { ToggleButton } from "react-bootstrap";
+import sample from "../images/CardSample.jpg";
+import logo from "../images/CookPal-logo.png";
+import header from "../images/CookPal-header.jpg";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 function RecipeDetails() {
-
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
   const navigate = useNavigate();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  
-  
   useEffect(() => {
     getData();
   }, []);
-  
+
   // function to get recipe details from the database
   const getData = async () => {
-    try { 
-      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`);
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
+      );
       setRecipe(response.data);
     } catch (error) {
-      console.error(error)}
+      console.error(error);
+    }
   };
 
-  if(!recipe) return <h3>Loading...</h3>
+  if (!recipe) return <h3>Loading...</h3>;
 
   const deleteRecipe = async () => {
     try {
-      const response = await axios.delete(`${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`);
+      const response = await axios.delete(
+        `${import.meta.env.VITE_SERVER_URL}/recipes/${recipeId}`,
+      );
       console.log("deleted!", response.data);
       navigate("/all-recipes");
     } catch (error) {
@@ -45,74 +48,163 @@ function RecipeDetails() {
   };
 
   return (
-    
     <div>
+      <Card
+        style={{
+          width: "30rem",
+          margin: "2rem auto",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        {recipe.source === "user" ? (
+          <Card.Img variant="top" src={sample} />
+        ) : (
+          <Card.Img variant="top" src={recipe.image} />
+        )}
+        <Card.Body>
+          <Card.Title>{recipe.title}</Card.Title>
+          {recipe.favChecked ? "❤️" : "💔"}
 
-      <Card style={{ width: '30rem', margin: '2rem auto', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-      {recipe.source === "user"
-        ?
-        <Card.Img variant="top" src={sample}/>
-        :
-        <Card.Img variant="top" src={recipe.image} />
-        }
-      <Card.Body>
-        <Card.Title>{recipe.title}</Card.Title> 
-       {recipe.favChecked ? "❤️" : "💔" }
-       
-        <Card.Text>
-          {recipe.description}
-        </Card.Text>
-      </Card.Body>
-       <ListGroup.Item style={{display:"flex", flexDirection:"row" , justifyContent:"space-evenly"}}>
-      <ListGroup.Item>Preperation time: {recipe.preperationTime}</ListGroup.Item>
-      <ListGroup.Item>Cooking time: {recipe.cookingTime}</ListGroup.Item>
-      <ListGroup.Item>Total time: {Number(recipe.preperationTime) + Number(recipe.cookingTime)}</ListGroup.Item>
-      </ListGroup.Item>
-
-{/* // if source is user show ingredients as normal , else show as API ingredients */}
-{recipe.source === "user" ?
-      <ListGroup className="list-group-flush" >
-        <ListGroup.Item style={{display:"flex",justifyContent:"left"}}><b>Ingredients:</b> 
-         <ul style={{display:"flex",justifyContent:"left", flexDirection:"column", alignContent:"center" }}>
-          {recipe.ingredients.map((ingredient,index) => (
-            
-            <li key={index}>{ingredient.name} - {ingredient.quantity}{ingredient.unit} </li>
-          ))}
-       </ul>
+          <Card.Text>{recipe.description}</Card.Text>
+        </Card.Body>
+        <ListGroup.Item
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-evenly",
+          }}
+        >
+          <ListGroup.Item>
+            Preperation time: {recipe.preperationTime}
+          </ListGroup.Item>
+          <ListGroup.Item>Cooking time: {recipe.cookingTime}</ListGroup.Item>
+          <ListGroup.Item>
+            Total time:{" "}
+            {Number(recipe.preperationTime) + Number(recipe.cookingTime)}
+          </ListGroup.Item>
         </ListGroup.Item>
-        <ListGroup.Item style={{display:"flex",justifyContent:"left"}}><b>Steps:</b> {recipe.steps}</ListGroup.Item>
-        <ListGroup.Item style={{display:"flex",justifyContent:"left"}}><b>Category: </b>{recipe.category}</ListGroup.Item>
-      <ListGroup.Item style={{display:"flex",justifyContent:"left"}} ><b>Created by:</b> {recipe.source}</ListGroup.Item>
-      </ListGroup>
-      :
-    <ListGroup className="list-group-flush" >
-        <ListGroup.Item style={{display:"flex",justifyContent:"left"}}><b>Ingredients:</b> 
-         </ListGroup.Item>
-   {recipe.ingredients.map((ingredient,index) => (
-            <ListGroup.Item key={index}>{ingredient.ingredient} - {ingredient.measure} </ListGroup.Item>
-          ))}
-            
-        <ListGroup.Item style={{display:"flex",justifyContent:"left"}}><b>Steps:</b> {recipe.steps}</ListGroup.Item>
-        <ListGroup.Item style={{display:"flex",justifyContent:"left"}}><b>Category: </b>{recipe.category}</ListGroup.Item>
-      <ListGroup.Item style={{display:"flex",justifyContent:"left"}} ><b>Created by:</b> {recipe.source}</ListGroup.Item>
-      </ListGroup> }
 
-      <Card.Body>
-     <button style={{ margin: "0.5rem" }} type="button" className="btn btn-secondary" onClick={()=>{navigate("/all-recipes")}}>
-          Back
-        </button>
-       <button style={{ margin: "0.5rem" }} type="button" className="btn btn-primary" onClick={()=>{navigate("/edit-recipe/"+recipeId)}}>
-          edit
-        </button>
-         <button style={{ margin: "0.5rem" }} type="button" className="btn btn-danger" onClick={deleteRecipe}>
-          delete
-        </button>
-      </Card.Body>
-    </Card>
-        
+        {/* // if source is user show ingredients as normal , else show as API ingredients */}
+        {recipe.source === "user" ? (
+          <ListGroup className="list-group-flush">
+            <ListGroup.Item style={{ display: "flex", justifyContent: "left" }}>
+              <b>Ingredients:</b>
+              <ul
+                style={{
+                  display: "flex",
+                  justifyContent: "left",
+                  flexDirection: "column",
+                  alignContent: "center",
+                }}
+              >
+                {recipe.ingredients.map((ingredient, index) => (
+                  <li key={index}>
+                    {ingredient.name} - {ingredient.quantity}
+                    {ingredient.unit}{" "}
+                  </li>
+                ))}
+              </ul>
+            </ListGroup.Item>
+            <ListGroup.Item style={{ display: "flex", justifyContent: "left" }}>
+              <b>Steps:</b> {recipe.steps}
+            </ListGroup.Item>
+            <ListGroup.Item style={{ display: "flex", justifyContent: "left" }}>
+              <b>Category: </b>
+              {recipe.category}
+            </ListGroup.Item>
+            <ListGroup.Item style={{ display: "flex", justifyContent: "left" }}>
+              <b>Created by:</b> {recipe.source}
+            </ListGroup.Item>
+          </ListGroup>
+        ) : (
+          <ListGroup className="list-group-flush">
+            <ListGroup.Item style={{ display: "flex", justifyContent: "left" }}>
+              <b>Ingredients:</b>
+            </ListGroup.Item>
+            {recipe.ingredients.map((ingredient, index) => (
+              <ListGroup.Item key={index}>
+                {ingredient.ingredient} - {ingredient.measure}{" "}
+              </ListGroup.Item>
+            ))}
+
+            <ListGroup.Item style={{ display: "flex", justifyContent: "left" }}>
+              <b>Steps:</b> {recipe.steps}
+            </ListGroup.Item>
+            <ListGroup.Item style={{ display: "flex", justifyContent: "left" }}>
+              <b>Category: </b>
+              {recipe.category}
+            </ListGroup.Item>
+            <ListGroup.Item style={{ display: "flex", justifyContent: "left" }}>
+              <b>Created by:</b> {recipe.source}
+            </ListGroup.Item>
+          </ListGroup>
+        )}
+
+        <Card.Body>
+          <button
+            style={{ margin: "0.5rem" }}
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => {
+              navigate("/all-recipes");
+            }}
+          >
+            Back
+          </button>
+          <button
+            style={{ margin: "0.5rem" }}
+            type="button"
+            className="btn btn-primary"
+            onClick={() => {
+              navigate("/edit-recipe/" + recipeId);
+            }}
+          >
+            edit
+          </button>
+          <button
+            style={{ margin: "0.5rem" }}
+            type="button"
+            className="btn btn-danger"
+            onClick={() => setShowDeleteModal(true)}
+          >
+            delete
+          </button>
+          
+          <Modal
+            show={showDeleteModal}
+            onHide={() => setShowDeleteModal(false)}
+            centered
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Delete Recipe</Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body>
+              Are you sure you want to delete this recipe?
+            </Modal.Body>
+
+            <Modal.Footer>
+              <Button
+                variant="secondary"
+                onClick={() => setShowDeleteModal(false)}
+              >
+                Cancel
+              </Button>
+
+              <Button
+                variant="danger"
+                onClick={() => {
+                  setShowDeleteModal(false);
+                  deleteRecipe();
+                }}
+              >
+                Delete
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </Card.Body>
+      </Card>
     </div>
-     
-      
-  )
+  );
 }
-export default RecipeDetails
+export default RecipeDetails;
