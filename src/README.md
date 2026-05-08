@@ -39,13 +39,18 @@ CookPal is a recipe management web application where users can create, view, edi
 ## 📸 Screenshots
 
 ### Home Page
-![Home Page](../images/screenshots/home.png)
+![Home Page](./public/screenshots/home.png)
 
 ### Recipes
-![Recipe Details](../images/screenshots/recipe.png)
+![Recipe Details](./public/screenshots/recipe.png)
 
 ### Recipe Details
-![Recipe Details](../images/screenshots/recipeDetails.png)
+![Recipe Details](./public/screenshots/recipeDetails.png)
+
+---
+## 🔗 Live Demo
+
+[CookPal App](https://cookpal-flame.vercel.app/)
 
 ---
 
@@ -53,7 +58,9 @@ CookPal is a recipe management web application where users can create, view, edi
 
 ### Clone the repository
 
-
+```bash
+git clone <https://github.com/Sara-designer88/CookPal-client.git>
+```
 
 ### Navigate to project
 
@@ -107,6 +114,13 @@ src/
 | POST | /recipes | Create recipe |
 | PUT | /recipes/:id | Update recipe |
 | DELETE | /recipes/:id | Delete recipe |
+
+---
+
+## 🚀 Deployment
+
+Frontend deployed on Vercel  
+Backend deployed on Render
 
 ---
 
