@@ -86,16 +86,16 @@ function RecipeDetails() {
         {/* // if source is user show ingredients as normal , else show as API ingredients */}
         {recipe.source === "user" ? (
           <ListGroup className="list-group-flush">
-            <ListGroup.Item style={{ display: "flex", justifyContent: "left" }}>
-              <b>Ingredients:</b>
-              <ul
-                style={{
+            <ListGroup.Item style={{ display: "flex",flexDirection:"row", justifyContent: "left" }}>
+              <b>Ingredients:</b> 
+             
+              <ul style={{
                   display: "flex",
-                  justifyContent: "left",
+                  flexWrap: "wrap",
+                  justifyItems: "left",
                   flexDirection: "column",
-                  alignContent: "center",
-                }}
-              >
+                  alignContent: "left",
+                }}>
                 {recipe.ingredients.map((ingredient, index) => (
                   <li key={index}>
                     {ingredient.name} - {ingredient.quantity}
@@ -103,6 +103,7 @@ function RecipeDetails() {
                   </li>
                 ))}
               </ul>
+           
             </ListGroup.Item>
             <ListGroup.Item style={{ display: "flex", justifyContent: "left" }}>
               <b>Steps:</b> {recipe.steps}
@@ -130,8 +131,7 @@ function RecipeDetails() {
               <b>Steps:</b> {recipe.steps}
             </ListGroup.Item>
             <ListGroup.Item style={{ display: "flex", justifyContent: "left" }}>
-              <b>Category: </b>
-              {recipe.category}
+              <b>Category:</b> {recipe.category}
             </ListGroup.Item>
             <ListGroup.Item style={{ display: "flex", justifyContent: "left" }}>
               <b>Created by:</b> {recipe.source}

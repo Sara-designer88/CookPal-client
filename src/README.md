@@ -53,9 +53,7 @@ CookPal is a recipe management web application where users can create, view, edi
 
 ### Clone the repository
 
-```bash
-git clone <https://github.com/Sara-designer88/CookPal-client.git>
-```
+
 
 ### Navigate to project
 

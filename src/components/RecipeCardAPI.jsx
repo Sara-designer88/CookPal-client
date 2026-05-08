@@ -11,7 +11,7 @@ function RecipeCardAPI(props) {
   
 
   return (  
- <div style={{display:'flex',flexWrap:'wrap'}}>
+ <div>
           <Card style={{ width: '18rem' ,margin: '1rem' , boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' , height: '100%' }}> 
       <Card.Img variant="top" src={props.recipe.strMealThumb} />
       <Card.Body>

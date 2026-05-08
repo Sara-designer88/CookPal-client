@@ -379,6 +379,17 @@ function EditRecipe() {
           <option value="Others">Others</option>
         </Form.Select>
 
+ <button
+          style={{ margin:" 1rem "}}
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => {
+              navigate("/recipes/" + recipeId);
+            }}
+          >
+            Back
+          </button> 
+          
 <ToggleButton
        style={{margin:"1rem"}}
         id="toggle-check"
@@ -391,16 +402,7 @@ function EditRecipe() {
         {favChecked ? "❤️" : "Add to 💔" }
      </ToggleButton>
 
-        <button
-        style={{ margin:" 1rem "}}
-          type="button"
-          className="btn btn-secondary"
-          onClick={() => {
-            navigate("/recipes/" + recipeId);
-          }}
-        >
-          Back
-        </button>
+         
   
 
         <button
