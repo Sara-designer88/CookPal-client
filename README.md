@@ -31,7 +31,7 @@ CookPal is a recipe management web application where users can create, view, edi
 
 ### Backend
 - Node.js
-- Express.js
+- JasonServer
 
 
 ---
