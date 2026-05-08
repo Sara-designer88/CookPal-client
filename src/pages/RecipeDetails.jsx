@@ -51,7 +51,7 @@ function RecipeDetails() {
       <Card style={{ width: '30rem', margin: '2rem auto', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
       {recipe.source === "user"
         ?
-        <Card.Img variant="top" src="./src/images/CardSample.jpg"/>
+        <Card.Img variant="top" src={sample}/>
         :
         <Card.Img variant="top" src={recipe.image} />
         }

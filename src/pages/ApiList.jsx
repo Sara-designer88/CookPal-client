@@ -8,6 +8,9 @@ import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
 import RecipeCardAPI from "../components/RecipeCardAPI";
 import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 import sample from "../images/CardSample.jpg"
 import logo from "../images/CookPal-logo.png"
 import header from "../images/CookPal-header.jpg"
@@ -20,6 +23,28 @@ function ApiList() {
 
   const [recipes, setRecipes] = useState(null);
   const [ category, setCategory]=useState("");
+
+
+  // this to search by name from the API 
+  const [searchQuery, setSearchQuery] = useState("")
+  const [filteredRecipes, setFilteredRecipes] = useState(recipes);
+   
+// function to get all API with the search name
+  const handleSearch = async (e) => {
+    let search = e.target.value
+    setSearchQuery(search)
+    console.log(search)
+
+    try {
+      const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery}`);
+      setRecipes(response.data.meals);
+      console.log(response.data.meals);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
+  
 
     //this to filter by recipe category from the selected base recipe
 
@@ -51,7 +76,20 @@ function ApiList() {
     <div>
       <h2 style={{ marginTop: "4rem", marginBottom: "2rem" }}> Recipes List </h2>
   
-    
+    <Form inline>
+        <Row>
+          <Col xs="auto">
+            <Form.Control
+              type="text"
+              placeholder="Search by recipe title"
+              className=" mr-sm-2"
+                value={searchQuery}
+                onChange={handleSearch}
+            />
+          </Col>
+        </Row>
+      </Form>
+
       <Form.Select className="mb-4" onChange={(e) => setCategory(e.target.value)}>
         <option value="" >Filter by category </option>
         <option value="Breakfast">Breakfast</option>
