@@ -22,7 +22,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 
 function RecipeList() {
   const [activeTab, setActiveTab] = useState("all");
-  const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState(null);
   const [category, setCategory] = useState("");
   const navigate = useNavigate();
 
@@ -68,7 +68,7 @@ function RecipeList() {
   const displayedRecipes = baseRecipes.filter((recipe) => {
     return category ? recipe.category === category : true;
   });
-  
+
   return (
     <div>
       <h2 style={{ marginTop: "2rem", marginBottom: "2rem" }}>Recipe List</h2>
