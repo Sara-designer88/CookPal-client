@@ -37,7 +37,8 @@ function ApiList() {
     try {
       const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`);
       setRecipes(response.data.meals);
-      setSearchQuery(search)
+      setSearchQuery(search);
+    } catch (error) {
       console.error(error);
     }
   };
