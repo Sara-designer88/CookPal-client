@@ -33,19 +33,15 @@ function ApiList() {
 // function to get all API with the search name
   const handleSearch = async (e) => {
     let search = e.target.value
-    setSearchQuery(search)
 
     try {
-      const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery}`);
+      const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`);
       setRecipes(response.data.meals);
-    } catch (error) {
+      setSearchQuery(search)
       console.error(error);
     }
   };
   
-
-
-   
 
   useEffect(() => {
     getData()
