@@ -10,7 +10,7 @@ import Badge from "react-bootstrap/Badge";
 import { ToggleButton } from "react-bootstrap";
 
 function AddRecipe() {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [ingredient, setIngredient] = useState({
@@ -91,6 +91,19 @@ function AddRecipe() {
       </h3>
 
       <form style={{ margin: "2rem" }}>
+
+        {/* <InputGroup className="mb-2" style={{ marginTop: "2rem" }}>
+          <InputGroup.Text id="inputGroup-sizing-default">
+            Upload Image URL 
+          </InputGroup.Text>
+          <Form.Control
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          />
+        </InputGroup> */}
+
         <InputGroup className="mb-4">
           <InputGroup.Text id="inputGroup-sizing-default">
             Title

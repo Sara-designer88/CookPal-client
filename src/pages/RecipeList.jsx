@@ -26,19 +26,6 @@ function RecipeList() {
   const [category, setCategory] = useState("");
   const navigate = useNavigate();
 
-  // BaseRecipe for choosing with list will appear based on filtering the pages
-  const baseRecipes =
-    activeTab === "my"
-      ? recipes.filter((r) => r.source === "user")
-      : activeTab === "api"
-        ? recipes.filter((r) => r.source === "api")
-        : recipes;
-
-  //this to filter by recipe category from the selected base recipe
-  const displayedRecipes = baseRecipes.filter((recipe) => {
-    return category ? recipe.category === category : true;
-  });
-
   useEffect(() => {
     getData();
   }, []);
@@ -69,6 +56,19 @@ function RecipeList() {
 </Button>
   )
 
+  // BaseRecipe for choosing with list will appear based on filtering the pages
+  const baseRecipes =
+    activeTab === "my"
+      ? recipes.filter((r) => r.source === "user")
+      : activeTab === "api"
+        ? recipes.filter((r) => r.source === "api")
+        : recipes;
+
+  //this to filter by recipe category from the selected base recipe
+  const displayedRecipes = baseRecipes.filter((recipe) => {
+    return category ? recipe.category === category : true;
+  });
+  
   return (
     <div>
       <h2 style={{ marginTop: "2rem", marginBottom: "2rem" }}>Recipe List</h2>
@@ -129,11 +129,7 @@ function RecipeList() {
       
         </Form.Select>
 
-        {/* <Form.Select >
-    <option value="">Filter by callories</option>
-    <option value="Easy">less than 500</option>
-    <option value="Hard">less than 1000</option>
-      </Form.Select> */}
+      
       </div>
 
       <div

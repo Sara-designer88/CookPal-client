@@ -45,7 +45,7 @@ function ApiList() {
   
 
 
-    //this to filter by recipe category from the selected base recipe
+   
 
   useEffect(() => {
     getData()
@@ -76,6 +76,7 @@ function ApiList() {
 </Button>
   )
 
+   //this to filter by recipe category from the selected base recipe
  const displayedRecipes = recipes.filter((recipe) => {
     return category ? recipe.strCategory === category : true;
   });

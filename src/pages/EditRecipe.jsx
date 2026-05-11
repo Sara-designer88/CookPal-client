@@ -113,10 +113,10 @@ function EditRecipe() {
       <h2 style={{ marginTop: "4rem", marginBottom: "2rem" }}>Edit Recipe</h2>
 
       <form style={{ margin: "2rem" }}>
-        
+
         {/* <InputGroup className="mb-2" style={{ marginTop: "2rem" }}>
           <InputGroup.Text id="inputGroup-sizing-default">
-            Upload Image
+            Upload Image URL 
           </InputGroup.Text>
           <Form.Control
             aria-label="Default"
